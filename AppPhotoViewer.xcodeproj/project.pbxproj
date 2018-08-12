@@ -20,6 +20,8 @@
 		A355713921201F0E00CF52F0 /* PhotoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355713821201F0E00CF52F0 /* PhotoListViewController.swift */; };
 		A355713C21201F2500CF52F0 /* PhotoListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355713B21201F2500CF52F0 /* PhotoListCoordinator.swift */; };
 		A355713E21201FC300CF52F0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355713D21201FC300CF52F0 /* AppCoordinator.swift */; };
+		A35571412120280E00CF52F0 /* PhotoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35571402120280E00CF52F0 /* PhotoItemViewModel.swift */; };
+		A35571442120334B00CF52F0 /* CollectionViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35571432120334B00CF52F0 /* CollectionViewConfigurator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		A355713821201F0E00CF52F0 /* PhotoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewController.swift; sourceTree = "<group>"; };
 		A355713B21201F2500CF52F0 /* PhotoListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListCoordinator.swift; sourceTree = "<group>"; };
 		A355713D21201FC300CF52F0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		A35571402120280E00CF52F0 /* PhotoItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItemViewModel.swift; sourceTree = "<group>"; };
+		A35571432120334B00CF52F0 /* CollectionViewConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewConfigurator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,7 @@
 		A35571302120149200CF52F0 /* PhotoListModule */ = {
 			isa = PBXGroup;
 			children = (
+				A355713F212027F000CF52F0 /* ViewModel */,
 				A355713A21201F1400CF52F0 /* Coordinator */,
 				A355713721201EF600CF52F0 /* ViewController */,
 				A3557132212014A300CF52F0 /* Manager */,
@@ -179,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				A3557135212014B800CF52F0 /* PhotosRequestManager.swift */,
+				A35571432120334B00CF52F0 /* CollectionViewConfigurator.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -197,6 +203,14 @@
 				A355713B21201F2500CF52F0 /* PhotoListCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		A355713F212027F000CF52F0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A35571402120280E00CF52F0 /* PhotoItemViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,8 +344,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A35571442120334B00CF52F0 /* CollectionViewConfigurator.swift in Sources */,
 				A355712B2120141100CF52F0 /* APIRequestManager.swift in Sources */,
 				A355712C2120141100CF52F0 /* URLRequestBuilder.swift in Sources */,
+				A35571412120280E00CF52F0 /* PhotoItemViewModel.swift in Sources */,
 				A3557134212014AE00CF52F0 /* PhotoItemModel.swift in Sources */,
 				A355713921201F0E00CF52F0 /* PhotoListViewController.swift in Sources */,
 				A3557136212014B800CF52F0 /* PhotosRequestManager.swift in Sources */,
