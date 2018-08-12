@@ -97,12 +97,9 @@
 		A35570F0211EF91B00CF52F0 /* AppPhotoViewer */ = {
 			isa = PBXGroup;
 			children = (
+				A355711F211EF99100CF52F0 /* Resources */,
 				A35570F1211EF91B00CF52F0 /* AppDelegate.swift */,
 				A35570F3211EF91B00CF52F0 /* ViewController.swift */,
-				A35570F5211EF91B00CF52F0 /* Main.storyboard */,
-				A35570F8211EF91D00CF52F0 /* Assets.xcassets */,
-				A35570FA211EF91D00CF52F0 /* LaunchScreen.storyboard */,
-				A35570FD211EF91D00CF52F0 /* Info.plist */,
 			);
 			path = AppPhotoViewer;
 			sourceTree = "<group>";
@@ -123,6 +120,17 @@
 				A3557113211EF91D00CF52F0 /* Info.plist */,
 			);
 			path = AppPhotoViewerUITests;
+			sourceTree = "<group>";
+		};
+		A355711F211EF99100CF52F0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A35570F5211EF91B00CF52F0 /* Main.storyboard */,
+				A35570F8211EF91D00CF52F0 /* Assets.xcassets */,
+				A35570FA211EF91D00CF52F0 /* LaunchScreen.storyboard */,
+				A35570FD211EF91D00CF52F0 /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,7 +440,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QK893C648G;
-				INFOPLIST_FILE = AppPhotoViewer/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/AppPhotoViewer/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,7 +458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QK893C648G;
-				INFOPLIST_FILE = AppPhotoViewer/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/AppPhotoViewer/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
