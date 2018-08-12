@@ -35,7 +35,8 @@ class AppCoordinator {
     
     func start() {
         // Start child controller.
-
+        childCoordinator = PhotoListCoordinator()
+        childCoordinator?.start(from: rootNavigationController)
     }
     
 }
