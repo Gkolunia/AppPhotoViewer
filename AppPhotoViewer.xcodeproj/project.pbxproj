@@ -22,6 +22,10 @@
 		A355713E21201FC300CF52F0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355713D21201FC300CF52F0 /* AppCoordinator.swift */; };
 		A35571412120280E00CF52F0 /* PhotoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35571402120280E00CF52F0 /* PhotoItemViewModel.swift */; };
 		A35571442120334B00CF52F0 /* CollectionViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35571432120334B00CF52F0 /* CollectionViewConfigurator.swift */; };
+		A355714821217A0900CF52F0 /* PhotoItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355714721217A0900CF52F0 /* PhotoItemCollectionViewCell.swift */; };
+		A355714A2121F90600CF52F0 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35571492121F90600CF52F0 /* ImageView.swift */; };
+		A355714D2121FA0000CF52F0 /* HorizontalCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355714C2121FA0000CF52F0 /* HorizontalCollectionViewLayout.swift */; };
+		A355714F2121FA2200CF52F0 /* VerticalCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355714E2121FA2200CF52F0 /* VerticalCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +67,10 @@
 		A355713D21201FC300CF52F0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		A35571402120280E00CF52F0 /* PhotoItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItemViewModel.swift; sourceTree = "<group>"; };
 		A35571432120334B00CF52F0 /* CollectionViewConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewConfigurator.swift; sourceTree = "<group>"; };
+		A355714721217A0900CF52F0 /* PhotoItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		A35571492121F90600CF52F0 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		A355714C2121FA0000CF52F0 /* HorizontalCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewLayout.swift; sourceTree = "<group>"; };
+		A355714E2121FA2200CF52F0 /* VerticalCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCollectionViewLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +171,8 @@
 		A35571302120149200CF52F0 /* PhotoListModule */ = {
 			isa = PBXGroup;
 			children = (
+				A355714B2121F9E000CF52F0 /* Layouts */,
+				A3557146212179EC00CF52F0 /* View */,
 				A355713F212027F000CF52F0 /* ViewModel */,
 				A355713A21201F1400CF52F0 /* Coordinator */,
 				A355713721201EF600CF52F0 /* ViewController */,
@@ -211,6 +221,24 @@
 				A35571402120280E00CF52F0 /* PhotoItemViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A3557146212179EC00CF52F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A355714721217A0900CF52F0 /* PhotoItemCollectionViewCell.swift */,
+				A35571492121F90600CF52F0 /* ImageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A355714B2121F9E000CF52F0 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				A355714C2121FA0000CF52F0 /* HorizontalCollectionViewLayout.swift */,
+				A355714E2121FA2200CF52F0 /* VerticalCollectionViewLayout.swift */,
+			);
+			path = Layouts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A355714A2121F90600CF52F0 /* ImageView.swift in Sources */,
 				A35571442120334B00CF52F0 /* CollectionViewConfigurator.swift in Sources */,
 				A355712B2120141100CF52F0 /* APIRequestManager.swift in Sources */,
 				A355712C2120141100CF52F0 /* URLRequestBuilder.swift in Sources */,
@@ -351,7 +380,10 @@
 				A3557134212014AE00CF52F0 /* PhotoItemModel.swift in Sources */,
 				A355713921201F0E00CF52F0 /* PhotoListViewController.swift in Sources */,
 				A3557136212014B800CF52F0 /* PhotosRequestManager.swift in Sources */,
+				A355714D2121FA0000CF52F0 /* HorizontalCollectionViewLayout.swift in Sources */,
 				A355713E21201FC300CF52F0 /* AppCoordinator.swift in Sources */,
+				A355714F2121FA2200CF52F0 /* VerticalCollectionViewLayout.swift in Sources */,
+				A355714821217A0900CF52F0 /* PhotoItemCollectionViewCell.swift in Sources */,
 				A35570F2211EF91B00CF52F0 /* AppDelegate.swift in Sources */,
 				A355713C21201F2500CF52F0 /* PhotoListCoordinator.swift in Sources */,
 			);
