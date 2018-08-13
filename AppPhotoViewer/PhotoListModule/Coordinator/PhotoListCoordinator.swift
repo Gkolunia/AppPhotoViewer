@@ -12,7 +12,10 @@ class PhotoListCoordinator : CoordinatorProtocol {
     
     func start(from navigationController: UINavigationController) {
         
-        let controller = PhotoListViewController(CollectionViewConfigurator(), PhotosRequestManager(with: URLRequestBuilder(with: UnsplashServiceConstants())))
+        let loader = PhotosRequestManager(with: URLRequestBuilder(with: UnsplashServiceConstants()))
+        let configurator = CollectionViewConfigurator()
+        loader.delegate = configurator
+        let controller = PhotoListViewController(configurator, loader)
         navigationController.show(controller, sender: nil)
         
     }
