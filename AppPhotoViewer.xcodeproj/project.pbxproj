@@ -23,9 +23,11 @@
 		A35571412120280E00CF52F0 /* PhotoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35571402120280E00CF52F0 /* PhotoItemViewModel.swift */; };
 		A35571442120334B00CF52F0 /* CollectionViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35571432120334B00CF52F0 /* CollectionViewConfigurator.swift */; };
 		A355714821217A0900CF52F0 /* PhotoItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355714721217A0900CF52F0 /* PhotoItemCollectionViewCell.swift */; };
-		A355714A2121F90600CF52F0 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35571492121F90600CF52F0 /* ImageView.swift */; };
 		A355714D2121FA0000CF52F0 /* HorizontalCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355714C2121FA0000CF52F0 /* HorizontalCollectionViewLayout.swift */; };
 		A355714F2121FA2200CF52F0 /* VerticalCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355714E2121FA2200CF52F0 /* VerticalCollectionViewLayout.swift */; };
+		A3557155212218B800CF52F0 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3557154212218B700CF52F0 /* Nuke.framework */; };
+		A355715621221AE500CF52F0 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3557154212218B700CF52F0 /* Nuke.framework */; };
+		A355715721221AE500CF52F0 /* Nuke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3557154212218B700CF52F0 /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,20 @@
 			remoteInfo = AppPhotoViewer;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A355715821221AE600CF52F0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A355715721221AE500CF52F0 /* Nuke.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A35570EE211EF91B00CF52F0 /* AppPhotoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppPhotoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,9 +84,9 @@
 		A35571402120280E00CF52F0 /* PhotoItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItemViewModel.swift; sourceTree = "<group>"; };
 		A35571432120334B00CF52F0 /* CollectionViewConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewConfigurator.swift; sourceTree = "<group>"; };
 		A355714721217A0900CF52F0 /* PhotoItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItemCollectionViewCell.swift; sourceTree = "<group>"; };
-		A35571492121F90600CF52F0 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		A355714C2121FA0000CF52F0 /* HorizontalCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewLayout.swift; sourceTree = "<group>"; };
 		A355714E2121FA2200CF52F0 /* VerticalCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCollectionViewLayout.swift; sourceTree = "<group>"; };
+		A3557154212218B700CF52F0 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3557155212218B800CF52F0 /* Nuke.framework in Frameworks */,
+				A355715621221AE500CF52F0 /* Nuke.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +139,7 @@
 		A35570F0211EF91B00CF52F0 /* AppPhotoViewer */ = {
 			isa = PBXGroup;
 			children = (
+				A3557154212218B700CF52F0 /* Nuke.framework */,
 				A35571302120149200CF52F0 /* PhotoListModule */,
 				A3557128212013DD00CF52F0 /* APIRequestManager */,
 				A355711F211EF99100CF52F0 /* Resources */,
@@ -227,7 +246,6 @@
 			isa = PBXGroup;
 			children = (
 				A355714721217A0900CF52F0 /* PhotoItemCollectionViewCell.swift */,
-				A35571492121F90600CF52F0 /* ImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,6 +269,7 @@
 				A35570EA211EF91B00CF52F0 /* Sources */,
 				A35570EB211EF91B00CF52F0 /* Frameworks */,
 				A35570EC211EF91B00CF52F0 /* Resources */,
+				A355715821221AE600CF52F0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -372,7 +391,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A355714A2121F90600CF52F0 /* ImageView.swift in Sources */,
 				A35571442120334B00CF52F0 /* CollectionViewConfigurator.swift in Sources */,
 				A355712B2120141100CF52F0 /* APIRequestManager.swift in Sources */,
 				A355712C2120141100CF52F0 /* URLRequestBuilder.swift in Sources */,

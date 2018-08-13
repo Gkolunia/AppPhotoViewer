@@ -17,7 +17,7 @@ struct PhotoItemViewModel {
     let likes : Int
     
     init(from model: PhotoItemModel) {
-        smallImageUrl = model.urls.thumb
+        smallImageUrl = model.urls.small
         largeImageUrl = model.urls.full
         size = CGSize(width: model.width, height: model.height)
         likes = model.likes

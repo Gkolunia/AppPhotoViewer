@@ -10,7 +10,7 @@ import Foundation
 
 struct PhotoUrls : Codable {
     let full : URL
-    let thumb : URL
+    let small : URL
 }
 
 struct PhotoItemModel : Codable {

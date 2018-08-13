@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Nuke
 
 class PhotoItemCollectionViewCell : UICollectionViewCell {
     
-    let imageView : ImageView = ImageView(frame: CGRect())
+    let imageView : UIImageView = UIImageView(frame: CGRect())
     let likeImage : UIImageView = UIImageView(image: UIImage(named: "like"))
     let countLikesLabel : UILabel = UILabel(frame: CGRect())
     
@@ -24,13 +25,12 @@ class PhotoItemCollectionViewCell : UICollectionViewCell {
     }
     
     func setup(_ item: PhotoItemViewModel) {
-        imageView.loadImageFromURL(url: item.largeImageUrl)
+        Nuke.loadImage(with: item.smallImageUrl, into: imageView)
         countLikesLabel.text = String(item.likes)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.cancelLoading()
         imageView.image = nil
         countLikesLabel.text = ""
     }
