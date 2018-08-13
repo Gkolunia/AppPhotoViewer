@@ -37,9 +37,12 @@ class VerticalCollectionViewLayout : UICollectionViewLayout {
     
     override func prepare() {
         
-        guard cache.isEmpty == true, let collectionView = collectionView, let delegate = delegate else {
+        guard let collectionView = collectionView, let delegate = delegate else {
             return
         }
+        
+        cache.removeAll()
+        
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset = [CGFloat]()
         

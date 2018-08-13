@@ -18,7 +18,7 @@ protocol PhotosLoader {
     func loadMore()
 }
 
-class PhotoListViewController : UIViewController {
+class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDelegate {
     
     let collectionViewConfigurator : PhotosCollectionViewConfigurator
     let photosLoader : PhotosLoader
@@ -43,6 +43,8 @@ class PhotoListViewController : UIViewController {
         
     }
     
-    
+    func needsLoadMoreItems() {
+        photosLoader.loadMore()
+    }
     
 }

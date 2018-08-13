@@ -16,6 +16,7 @@ class PhotoListCoordinator : CoordinatorProtocol {
         let configurator = CollectionViewConfigurator()
         loader.delegate = configurator
         let controller = PhotoListViewController(configurator, loader)
+        configurator.delegate = controller
         navigationController.show(controller, sender: nil)
         
     }
