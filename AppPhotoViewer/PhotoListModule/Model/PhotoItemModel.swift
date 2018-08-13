@@ -9,13 +9,19 @@
 import Foundation
 
 struct PhotoUrls : Codable {
-    let full : String
-    let thumb : String
+    let full : URL
+    let thumb : URL
 }
 
 struct PhotoItemModel : Codable {
     
     let urls : PhotoUrls
     let likes : Int
+    let width : Int
+    let height : Int
     
+}
+
+struct PhotosContainer : Codable {
+    let results : [PhotoItemModel]
 }

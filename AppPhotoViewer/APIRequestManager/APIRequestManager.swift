@@ -9,7 +9,7 @@
 import Foundation
 
 typealias ErrorMessage = (title: String, description: String?)
-typealias CompletionHandler<T> = (_ succes: Bool, _ object: [T]?,_ errorMessage: ErrorMessage?) -> ()
+typealias CompletionHandler<T> = (_ succes: Bool, _ object: T?,_ errorMessage: ErrorMessage?) -> ()
 
 /// Base errors for network service
 fileprivate struct NetworkDomainErrors {
@@ -66,7 +66,7 @@ class APIRequestManager {
             case 200...204:
                 if let dataResponse = data {
                     do {
-                        let mappableObject = try JSONDecoder().decode([T].self, from: dataResponse)
+                        let mappableObject = try JSONDecoder().decode(T.self, from: dataResponse)
                         DispatchQueue.main.async {
                             handler(true, mappableObject, nil)
                         }
