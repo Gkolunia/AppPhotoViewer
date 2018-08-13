@@ -10,7 +10,7 @@ import UIKit
 
 class CollectionViewConfigurator : NSObject, PhotosCollectionViewConfigurator {
     
-    var dataSource : [PhotoItemModel]? {
+    var dataSource : [PhotoItemViewModel]? {
         didSet {
             self.collectionView?.reloadData()
         }
@@ -23,6 +23,8 @@ class CollectionViewConfigurator : NSObject, PhotosCollectionViewConfigurator {
         collectionView.delegate = self
         collectionView.register(PhotoItemCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoItemCollectionViewCell")
         self.collectionView = collectionView
+        self.collectionView?.backgroundView?.backgroundColor = .white
+        self.collectionView?.backgroundColor = .white
     }
     
     func collectionLayout() -> UICollectionViewLayout {
@@ -38,7 +40,7 @@ extension CollectionViewConfigurator : VerticalCollectionViewLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, sizeForPhotoAtIndexPath: IndexPath) -> CGSize {
         if let dataSource = dataSource {
             let item = dataSource[sizeForPhotoAtIndexPath.item]
-            return CGSize(width: item.width, height: item.height)
+            return item.size
         }
         return CGSize()
     }
@@ -48,7 +50,7 @@ extension CollectionViewConfigurator : VerticalCollectionViewLayoutDelegate {
 extension CollectionViewConfigurator : PhotosListShowing {
     
     func photosLoaded(_ array: [PhotoItemModel]) {
-        dataSource = array
+        dataSource = array.map( { PhotoItemViewModel(from: $0) })
     }
     
 }

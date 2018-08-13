@@ -6,13 +6,21 @@
 //  Copyright © 2018 Hrybenuik Mykola. All rights reserved.
 //
 
+import Foundation
 import CoreGraphics
 
 struct PhotoItemViewModel {
     
-    let smallImageUrl : String
-    let largeImageUrl : String
+    let smallImageUrl : URL
+    let largeImageUrl : URL
     let size : CGSize
     let likes : Int
+    
+    init(from model: PhotoItemModel) {
+        smallImageUrl = model.urls.thumb
+        largeImageUrl = model.urls.full
+        size = CGSize(width: model.width, height: model.height)
+        likes = model.likes
+    }
     
 }

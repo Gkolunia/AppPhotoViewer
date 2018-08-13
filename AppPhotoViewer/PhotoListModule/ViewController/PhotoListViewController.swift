@@ -39,6 +39,7 @@ class PhotoListViewController : UIViewController {
         collectionViewConfigurator.configurate(collectionView)
         view.addSubview(collectionView)
         photosLoader.initialLoadPhotos()
+        self.navigationItem.title = "Photos"
         
     }
     
