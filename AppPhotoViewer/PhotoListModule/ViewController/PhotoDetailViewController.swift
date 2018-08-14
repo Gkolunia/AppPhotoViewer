@@ -15,8 +15,14 @@ class PhotoDetailViewController : UIViewController {
     let collectionViewContainer : UIView = UIView(frame: CGRect())
     weak var photoListController : PhotoListViewController?
     
-    var viewModel : PhotoItemViewModel! {
+    var viewModel : PhotoItemViewModel? {
         didSet {
+            
+            guard let viewModel = viewModel else {
+                return
+            }
+            if let oldValue = oldValue, viewModel.id == oldValue.id { return }
+            
             // Firstly set image which is already loaded and then load full size image.
             let image = ImageCache.shared[ImageRequest(url: viewModel.smallImageUrl)]
 

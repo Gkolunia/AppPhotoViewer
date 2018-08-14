@@ -10,26 +10,26 @@ import UIKit
 
 class CollectionViewConfigurator<CellType: GenericCell> : NSObject, PhotosCollectionViewConfigurator  {
     
-    var collectionViewDataSource : GenericCollectionViewHelper<CellType>
+    var collectionViewHelper : GenericCollectionViewHelper<CellType>
     
     private var collectionView : UICollectionView?
     private var collectionViewLayout : UICollectionViewLayout = UICollectionViewFlowLayout()
     
     init(with layout: UICollectionViewLayout, _ dataSourceAndDelegate: GenericCollectionViewHelper<CellType>) {
         collectionViewLayout = layout
-        collectionViewDataSource = dataSourceAndDelegate
+        collectionViewHelper = dataSourceAndDelegate
     }
     
     func configurate(_ collectionView: UICollectionView) {
         
-        collectionView.dataSource = collectionViewDataSource
-        collectionView.delegate = collectionViewDataSource
+        collectionView.dataSource = collectionViewHelper
+        collectionView.delegate = collectionViewHelper
         collectionView.register(CellType.self, forCellWithReuseIdentifier: CellType.reuseId())
         self.collectionView = collectionView
         self.collectionView?.backgroundView?.backgroundColor = .white
         self.collectionView?.backgroundColor = .white
         
-        collectionViewDataSource.collectionView = collectionView
+        collectionViewHelper.collectionView = collectionView
         
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false

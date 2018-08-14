@@ -54,6 +54,7 @@ extension PhotoListCoordinator {
         loader.delegate = collectionViewHelper
         
         let photoListController = PhotoListViewController(configurator, loader)
+        collectionViewHelper.delegate = photoListController
         detailPhotoController.setupChildPhotosController(photoListController)
         detailPhotoController.viewModel = item
         detailPhotoController.currentIndexPath = collectionViewHelper.indexPath(for: item)
