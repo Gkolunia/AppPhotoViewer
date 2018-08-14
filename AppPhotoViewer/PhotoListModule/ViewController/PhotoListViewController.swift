@@ -14,20 +14,14 @@ protocol PhotosCollectionViewConfigurator {
 }
 
 protocol PhotosLoader {
-    func initialLoadPhotos()
     func loadMore()
 }
 
-protocol PhotoListViewControllerDelegate : class {
-    func doSelecting(_ item: PhotoItemViewModel)
-}
-
 class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDelegate {
-    
-    weak var delegate : PhotoListViewControllerDelegate?
-    
+
     let collectionViewConfigurator : PhotosCollectionViewConfigurator
     let photosLoader : PhotosLoader
+    weak var collectionView : UICollectionView?
     
     init(_ configurator:PhotosCollectionViewConfigurator, _ loader: PhotosLoader) {
         collectionViewConfigurator = configurator
@@ -44,17 +38,12 @@ class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDele
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         collectionViewConfigurator.configurate(collectionView)
         view.addSubview(collectionView)
-        photosLoader.initialLoadPhotos()
         self.navigationItem.title = "Photos"
-        
+        self.collectionView = collectionView
     }
     
     func needsLoadMoreItems() {
         photosLoader.loadMore()
-    }
-    
-    func didSelectItem(_ item: PhotoItemViewModel) {
-        delegate?.doSelecting(item)
     }
     
 }

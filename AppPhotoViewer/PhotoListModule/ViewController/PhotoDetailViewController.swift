@@ -29,6 +29,8 @@ class PhotoDetailViewController : UIViewController {
             self.navigationItem.title = viewModel.tagTitle.capitalized
         }
     }
+    
+    var currentIndexPath : IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,13 @@ class PhotoDetailViewController : UIViewController {
         
         imageView.contentMode = .scaleAspectFit
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let indexPath = currentIndexPath {
+            photoListController?.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        }
     }
     
     func setupChildPhotosController(_ photoListController: PhotoListViewController) {

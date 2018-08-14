@@ -48,9 +48,7 @@ extension PhotoListCoordinator {
         collectionViewDelegate.didScrollToItem = { item in
             detailPhotoController.viewModel = item
         }
-        
-        
-        
+
         let configurator = CollectionViewConfigurator<SmallPhotoItemCollectionViewCell>(with: layout, collectionViewDelegate)
         
         loader.delegate = collectionViewDelegate
@@ -58,6 +56,8 @@ extension PhotoListCoordinator {
         let photoListController = PhotoListViewController(configurator, loader)
         detailPhotoController.setupChildPhotosController(photoListController)
         detailPhotoController.viewModel = item
+        detailPhotoController.currentIndexPath = collectionViewDelegate.indexPath(for: item)
+        
         rootNavigationController?.show(detailPhotoController, sender: nil)
     }
     

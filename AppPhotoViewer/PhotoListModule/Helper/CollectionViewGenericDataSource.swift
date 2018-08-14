@@ -53,4 +53,17 @@ class CollectionViewDataSourceAndDelegate<CellType: PhotoGenericCell>: NSObject,
         // For purpose to override in inherited classes.
     }
     
+    func indexPath(for item: CellType.PhotoGenericCellItemViewModel) -> IndexPath? {
+        
+        let index = dataSource.index { (itemInArray) -> Bool in
+            return itemInArray.id == item.id
+        }
+        
+        if let index = index {
+            return IndexPath(row: index, section: 0)
+        }
+        
+        return nil
+    }
+    
 }

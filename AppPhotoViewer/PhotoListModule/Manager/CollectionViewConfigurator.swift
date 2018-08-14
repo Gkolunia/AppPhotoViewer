@@ -21,6 +21,7 @@ class CollectionViewConfigurator<T: PhotoGenericCell> : NSObject, PhotosCollecti
     }
     
     func configurate(_ collectionView: UICollectionView) {
+        
         collectionView.dataSource = collectionViewDataSource
         collectionView.delegate = collectionViewDataSource
         collectionView.register(T.self, forCellWithReuseIdentifier: "PhotoItemCollectionViewCell")
@@ -30,17 +31,12 @@ class CollectionViewConfigurator<T: PhotoGenericCell> : NSObject, PhotosCollecti
         
         collectionViewDataSource.collectionView = collectionView
         
-        
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
     }
     
     func collectionLayout() -> UICollectionViewLayout {
         return collectionViewLayout
-    }
-    
-    func scroll(to item: PhotoItemViewModel) {
-
     }
  
 }
