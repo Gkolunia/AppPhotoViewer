@@ -33,9 +33,7 @@ class HorizontalCollectionViewLayout : UICollectionViewLayout {
         guard cache.isEmpty == true, let collectionView = collectionView else {
             return
         }
-        
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: collectionView.bounds.width/2)
-        
+
         let widthCell = cellPadding*2 + collectionView.frame.size.height/2
         let heightCell = collectionView.frame.size.height
         var xOffset : CGFloat = collectionView.frame.size.width/2
@@ -56,6 +54,8 @@ class HorizontalCollectionViewLayout : UICollectionViewLayout {
             xOffset = xOffset + widthCell
 
         }
+        
+        contentWidth = contentWidth+collectionView.bounds.width/2
         
     }
     
