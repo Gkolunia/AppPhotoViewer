@@ -9,14 +9,22 @@
 import Foundation
 import CoreGraphics
 
-struct PhotoItemViewModel : Equatable {
-    
+protocol EquatableItem : Equatable {
+    var id : String { get set }
+}
+
+func ==<T: EquatableItem>(lhs: T, rhs: T) -> Bool {
+    return lhs.id == rhs.id
+}
+
+struct PhotoItemViewModel : EquatableItem {
+
     let smallImageUrl : URL
     let largeImageUrl : URL
     let size : CGSize
     let likes : Int
     let tagTitle : String
-    let id : String
+    var id: String
     
     init(from model: PhotoItemModel) {
         smallImageUrl = model.urls.small
@@ -26,9 +34,5 @@ struct PhotoItemViewModel : Equatable {
         tagTitle = model.tags.first?.title ?? ""
         id = model.id
     }
-    
-    static func ==(lhs: PhotoItemViewModel, rhs: PhotoItemViewModel) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
+
 }
