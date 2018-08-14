@@ -18,7 +18,13 @@ protocol PhotosLoader {
     func loadMore()
 }
 
+protocol PhotoListViewControllerDelegate : class {
+    func doSelecting(_ item: PhotoItemViewModel)
+}
+
 class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDelegate {
+    
+    weak var delegate : PhotoListViewControllerDelegate?
     
     let collectionViewConfigurator : PhotosCollectionViewConfigurator
     let photosLoader : PhotosLoader
@@ -48,7 +54,7 @@ class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDele
     }
     
     func didSelectItem(_ item: PhotoItemViewModel) {
-        
+        delegate?.doSelecting(item)
     }
     
 }

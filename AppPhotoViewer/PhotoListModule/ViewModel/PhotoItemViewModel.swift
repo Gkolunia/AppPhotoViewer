@@ -15,12 +15,14 @@ struct PhotoItemViewModel {
     let largeImageUrl : URL
     let size : CGSize
     let likes : Int
+    let tagTitle : String
     
     init(from model: PhotoItemModel) {
         smallImageUrl = model.urls.small
         largeImageUrl = model.urls.full
         size = CGSize(width: model.width, height: model.height)
         likes = model.likes
+        tagTitle = model.tags.first?.title ?? ""
     }
     
 }

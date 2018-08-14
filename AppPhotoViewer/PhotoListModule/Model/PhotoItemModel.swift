@@ -13,13 +13,17 @@ struct PhotoUrls : Codable {
     let small : URL
 }
 
+struct Tag : Codable {
+    let title : String
+}
+
 struct PhotoItemModel : Codable {
     
     let urls : PhotoUrls
     let likes : Int
     let width : Int
     let height : Int
-    
+    let tags : [Tag]
 }
 
 struct PhotosContainer : Codable {

@@ -24,7 +24,7 @@ class PhotoDetailViewController : UIViewController {
                 self.imageView.image = response?.image
             }
             
-            self.navigationItem.title = viewModel.tagTitle
+            self.navigationItem.title = viewModel.tagTitle.capitalized
         }
     }
     
