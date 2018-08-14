@@ -9,11 +9,16 @@
 import UIKit
 import Nuke
 
+protocol PhotoDetailViewControllerDelegate : class {
+    func doDissmiss(with detailViewcontroller: PhotoDetailViewController)
+}
+
 class PhotoDetailViewController : UIViewController {
     
     let imageView : UIImageView = UIImageView(frame: CGRect())
     let collectionViewContainer : UIView = UIView(frame: CGRect())
     weak var photoListController : PhotoListViewController?
+    weak var delegate : PhotoDetailViewControllerDelegate?
     
     var viewModel : PhotoItemViewModel? {
         didSet {
@@ -68,6 +73,11 @@ class PhotoDetailViewController : UIViewController {
         if let indexPath = currentIndexPath {
             photoListController?.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.doDissmiss(with: self)
     }
     
     func setupChildPhotosController(_ photoListController: PhotoListViewController) {

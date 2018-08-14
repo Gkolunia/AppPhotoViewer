@@ -13,23 +13,24 @@ class PhotoListCoordinator : CoordinatorProtocol {
     var rootNavigationController : UINavigationController?
     private var loader : PhotosPaginationLoader = PhotosPaginationLoader(PhotosRequestManager(with: URLRequestBuilder(with: UnsplashServiceConstants())))
     private var mainPhotosListHelper = VerticalCollectionViewHelper()
+    private weak var detailPhotoListHelper : HorizontalCollectionViewHelper?
     
     func start(from navigationController: UINavigationController) {
         
         rootNavigationController = navigationController
-    
-        let layout = VerticalCollectionViewLayout()
-        let configurator = CollectionViewConfigurator<PhotoItemCollectionViewCell>(with: layout, mainPhotosListHelper)
+        loader.delegate = mainPhotosListHelper
         mainPhotosListHelper.didSelectHandler = {[weak self] item in
             self?.doSelecting(item)
         }
-        
+    
+        let layout = VerticalCollectionViewLayout()
         layout.delegate = mainPhotosListHelper
-        loader.delegate = mainPhotosListHelper
+        
+        let configurator = CollectionViewConfigurator<PhotoItemCollectionViewCell>(with: layout, mainPhotosListHelper)
         
         let controller = PhotoListViewController(configurator, loader)
-
         mainPhotosListHelper.delegate = controller
+        
         navigationController.show(controller, sender: nil)
         
         loader.initialLoadPhotos()
@@ -41,12 +42,14 @@ extension PhotoListCoordinator {
     
     func doSelecting(_ item: PhotoItemViewModel) {
         let detailPhotoController  = PhotoDetailViewController(nibName: nil, bundle: nil)
+        detailPhotoController.delegate = self
         
         let layout = HorizontalCollectionViewLayout()
         let collectionViewHelper = HorizontalCollectionViewHelper()
         collectionViewHelper.dataSource = mainPhotosListHelper.dataSource
         collectionViewHelper.didScrollToItem = { item in
             detailPhotoController.viewModel = item
+            detailPhotoController.currentIndexPath = collectionViewHelper.indexPath(for: item)
         }
 
         let configurator = CollectionViewConfigurator<SmallPhotoItemCollectionViewCell>(with: layout, collectionViewHelper)
@@ -60,6 +63,22 @@ extension PhotoListCoordinator {
         detailPhotoController.currentIndexPath = collectionViewHelper.indexPath(for: item)
         
         rootNavigationController?.show(detailPhotoController, sender: nil)
+        
+        detailPhotoListHelper = collectionViewHelper
+    }
+    
+}
+
+extension PhotoListCoordinator : PhotoDetailViewControllerDelegate {
+    
+    func doDissmiss(with detailViewcontroller: PhotoDetailViewController) {
+        loader.delegate = mainPhotosListHelper
+        if let updatedDataSource = detailPhotoListHelper?.dataSource {
+            mainPhotosListHelper.dataSource = updatedDataSource
+            if let indexPath = detailViewcontroller.currentIndexPath {
+                mainPhotosListHelper.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
+            }
+        }
     }
     
 }
