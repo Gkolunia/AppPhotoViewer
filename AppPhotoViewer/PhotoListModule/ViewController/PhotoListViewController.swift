@@ -47,4 +47,8 @@ class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDele
         photosLoader.loadMore()
     }
     
+    func didSelectItem(_ item: PhotoItemViewModel) {
+        
+    }
+    
 }

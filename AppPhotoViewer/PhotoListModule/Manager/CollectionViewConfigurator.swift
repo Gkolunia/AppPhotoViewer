@@ -10,6 +10,7 @@ import UIKit
 
 protocol PhotosCollectionViewEventsDelegate : class {
     func needsLoadMoreItems()
+    func didSelectItem(_ item: PhotoItemViewModel)
 }
 
 class CollectionViewConfigurator : NSObject, PhotosCollectionViewConfigurator {
@@ -73,6 +74,10 @@ extension CollectionViewConfigurator : UICollectionViewDelegate, UICollectionVie
             photoCell.setup(dataSource[indexPath.row])
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectItem(dataSource[indexPath.row])
     }
     
 }
