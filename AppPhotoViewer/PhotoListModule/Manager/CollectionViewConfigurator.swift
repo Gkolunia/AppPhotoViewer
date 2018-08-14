@@ -8,14 +8,14 @@
 
 import UIKit
 
-class CollectionViewConfigurator<T: PhotoGenericCell> : NSObject, PhotosCollectionViewConfigurator  {
+class CollectionViewConfigurator<T: GenericCell> : NSObject, PhotosCollectionViewConfigurator  {
     
-    var collectionViewDataSource : CollectionViewDataSourceAndDelegate<T>
+    var collectionViewDataSource : GenericCollectionViewHelper<T>
     
     private var collectionView : UICollectionView?
     private var collectionViewLayout : UICollectionViewLayout = UICollectionViewFlowLayout()
     
-    init(with layout: UICollectionViewLayout, _ dataSourceAndDelegate: CollectionViewDataSourceAndDelegate<T>) {
+    init(with layout: UICollectionViewLayout, _ dataSourceAndDelegate: GenericCollectionViewHelper<T>) {
         collectionViewLayout = layout
         collectionViewDataSource = dataSourceAndDelegate
     }

@@ -8,23 +8,22 @@
 
 import UIKit
 
-protocol PhotoGenericCell : class {
-    associatedtype PhotoGenericCellItemViewModel : EquatableItem
-    func setup(with item: PhotoGenericCellItemViewModel)
-}
-
-protocol PhotosCollectionViewEventsDelegate : class {
+protocol GenericCollectionViewEventsDelegate : class {
     func needsLoadMoreItems()
 }
 
-class CollectionViewDataSourceAndDelegate<CellType: PhotoGenericCell>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
+protocol GenericCell : class {
+    associatedtype GenericCellItemViewModel : EquatableItem
+    func setup(with item: GenericCellItemViewModel)
+}
+
+class GenericCollectionViewHelper<CellType: GenericCell>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
     
     weak var collectionView : UICollectionView?
+    weak var delegate : GenericCollectionViewEventsDelegate?
     
-    var didSelectHandler : ((CellType.PhotoGenericCellItemViewModel) -> ())?
-    weak var delegate : PhotosCollectionViewEventsDelegate?
-    
-    var dataSource :  [CellType.PhotoGenericCellItemViewModel] = [CellType.PhotoGenericCellItemViewModel]() {
+    var didSelectHandler : ((CellType.GenericCellItemViewModel) -> ())?
+    var dataSource :  [CellType.GenericCellItemViewModel] = [CellType.GenericCellItemViewModel]() {
         didSet {
             self.collectionView?.collectionViewLayout.prepare()
             let indexPath : [IndexPath] = (oldValue.count..<dataSource.count).map({IndexPath(row: $0, section: 0)})
@@ -53,7 +52,7 @@ class CollectionViewDataSourceAndDelegate<CellType: PhotoGenericCell>: NSObject,
         // For purpose to override in inherited classes.
     }
     
-    func indexPath(for item: CellType.PhotoGenericCellItemViewModel) -> IndexPath? {
+    func indexPath(for item: CellType.GenericCellItemViewModel) -> IndexPath? {
         
         let index = dataSource.index { (itemInArray) -> Bool in
             return itemInArray.id == item.id

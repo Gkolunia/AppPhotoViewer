@@ -12,7 +12,7 @@ class PhotoListCoordinator : CoordinatorProtocol {
     
     var rootNavigationController : UINavigationController?
     private var loader : PhotosPaginationLoader = PhotosPaginationLoader(PhotosRequestManager(with: URLRequestBuilder(with: UnsplashServiceConstants())))
-    private var mainPhotosListDataSource = VerticalCollectionViewDataSource()
+    private var mainPhotosListDataSource = VerticalCollectionViewHelper()
     
     func start(from navigationController: UINavigationController) {
         
@@ -43,7 +43,7 @@ extension PhotoListCoordinator {
         let detailPhotoController  = PhotoDetailViewController(nibName: nil, bundle: nil)
         
         let layout = HorizontalCollectionViewLayout()
-        let collectionViewDelegate = HorizontalCollectionViewDataSource()
+        let collectionViewDelegate = HorizontalCollectionViewHelper()
         collectionViewDelegate.dataSource = mainPhotosListDataSource.dataSource
         collectionViewDelegate.didScrollToItem = { item in
             detailPhotoController.viewModel = item

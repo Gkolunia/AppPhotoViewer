@@ -17,7 +17,7 @@ protocol PhotosLoader {
     func loadMore()
 }
 
-class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDelegate {
+class PhotoListViewController : UIViewController, GenericCollectionViewEventsDelegate {
 
     let collectionViewConfigurator : PhotosCollectionViewConfigurator
     let photosLoader : PhotosLoader

@@ -9,7 +9,7 @@
 import UIKit
 import Nuke
 
-class PhotoItemCollectionViewCell : UICollectionViewCell, PhotoGenericCell {
+class PhotoItemCollectionViewCell : UICollectionViewCell, GenericCell {
     typealias CellGenericItem = PhotoItemViewModel
     
     let imageView : UIImageView = UIImageView(frame: CGRect())
