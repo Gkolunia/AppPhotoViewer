@@ -236,8 +236,8 @@
 			isa = PBXGroup;
 			children = (
 				A3557135212014B800CF52F0 /* PhotosRequestManager.swift */,
-				A35571432120334B00CF52F0 /* CollectionViewConfigurator.swift */,
 				A355715D2123264800CF52F0 /* PhotosPaginationLoader.swift */,
+				A35571432120334B00CF52F0 /* CollectionViewConfigurator.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";

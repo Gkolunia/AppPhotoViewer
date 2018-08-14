@@ -20,8 +20,8 @@ class PhotoListCoordinator : CoordinatorProtocol {
     
         let layout = VerticalCollectionViewLayout()
         let configurator = CollectionViewConfigurator<PhotoItemCollectionViewCell>(with: layout, mainPhotosListDataSource)
-        mainPhotosListDataSource.didSelectHandler = { item in
-            self.doSelecting(item)
+        mainPhotosListDataSource.didSelectHandler = {[weak self] item in
+            self?.doSelecting(item)
         }
         
         layout.delegate = mainPhotosListDataSource
