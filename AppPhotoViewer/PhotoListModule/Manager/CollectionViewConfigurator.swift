@@ -8,14 +8,14 @@
 
 import UIKit
 
-class CollectionViewConfigurator<T: GenericCell> : NSObject, PhotosCollectionViewConfigurator  {
+class CollectionViewConfigurator<CellType: GenericCell> : NSObject, PhotosCollectionViewConfigurator  {
     
-    var collectionViewDataSource : GenericCollectionViewHelper<T>
+    var collectionViewDataSource : GenericCollectionViewHelper<CellType>
     
     private var collectionView : UICollectionView?
     private var collectionViewLayout : UICollectionViewLayout = UICollectionViewFlowLayout()
     
-    init(with layout: UICollectionViewLayout, _ dataSourceAndDelegate: GenericCollectionViewHelper<T>) {
+    init(with layout: UICollectionViewLayout, _ dataSourceAndDelegate: GenericCollectionViewHelper<CellType>) {
         collectionViewLayout = layout
         collectionViewDataSource = dataSourceAndDelegate
     }
@@ -24,7 +24,7 @@ class CollectionViewConfigurator<T: GenericCell> : NSObject, PhotosCollectionVie
         
         collectionView.dataSource = collectionViewDataSource
         collectionView.delegate = collectionViewDataSource
-        collectionView.register(T.self, forCellWithReuseIdentifier: "PhotoItemCollectionViewCell")
+        collectionView.register(CellType.self, forCellWithReuseIdentifier: CellType.reuseId())
         self.collectionView = collectionView
         self.collectionView?.backgroundView?.backgroundColor = .white
         self.collectionView?.backgroundColor = .white

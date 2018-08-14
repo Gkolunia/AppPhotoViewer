@@ -15,6 +15,13 @@ protocol GenericCollectionViewEventsDelegate : class {
 protocol GenericCell : class {
     associatedtype GenericCellItemViewModel : EquatableItem
     func setup(with item: GenericCellItemViewModel)
+    static func reuseId() -> String
+}
+
+extension GenericCell {
+    static func reuseId() -> String {
+        return "GenericCellId"
+    }
 }
 
 class GenericCollectionViewHelper<CellType: GenericCell>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
@@ -36,7 +43,7 @@ class GenericCollectionViewHelper<CellType: GenericCell>: NSObject, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoItemCollectionViewCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellType.reuseId(), for: indexPath)
         
         if let photoCell = cell as? CellType {
             photoCell.setup(with: dataSource[indexPath.row])
