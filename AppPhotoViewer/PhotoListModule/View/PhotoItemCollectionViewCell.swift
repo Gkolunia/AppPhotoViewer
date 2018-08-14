@@ -9,7 +9,8 @@
 import UIKit
 import Nuke
 
-class PhotoItemCollectionViewCell : UICollectionViewCell {
+class PhotoItemCollectionViewCell : UICollectionViewCell, PhotoGenericCell {
+    typealias CellGenericItem = PhotoItemViewModel
     
     let imageView : UIImageView = UIImageView(frame: CGRect())
     let likeImage : UIImageView = UIImageView(image: UIImage(named: "like"))
@@ -24,7 +25,7 @@ class PhotoItemCollectionViewCell : UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(_ item: PhotoItemViewModel) {
+    func setup(with item: CellGenericItem) {
         Nuke.loadImage(with: item.smallImageUrl, into: imageView)
         countLikesLabel.text = String(item.likes)
     }

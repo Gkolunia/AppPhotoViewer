@@ -8,12 +8,16 @@
 
 import UIKit
 
+protocol PhotoGenericCell : class {
+    func setup(with item: PhotoItemViewModel)
+}
+
 protocol PhotosCollectionViewEventsDelegate : class {
     func needsLoadMoreItems()
     func didSelectItem(_ item: PhotoItemViewModel)
 }
 
-class CollectionViewConfigurator : NSObject, PhotosCollectionViewConfigurator {
+class CollectionViewConfigurator<T: PhotoGenericCell> : NSObject, PhotosCollectionViewConfigurator, UICollectionViewDelegate, UICollectionViewDataSource {
     
     weak var delegate : PhotosCollectionViewEventsDelegate?
     
@@ -26,20 +30,46 @@ class CollectionViewConfigurator : NSObject, PhotosCollectionViewConfigurator {
     }
     
     private var collectionView : UICollectionView?
+    private var collectionViewLayout : UICollectionViewLayout = UICollectionViewFlowLayout()
+    
+    init(with layout: UICollectionViewLayout) {
+        collectionViewLayout = layout
+    }
     
     func configurate(_ collectionView: UICollectionView) {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(PhotoItemCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoItemCollectionViewCell")
+        collectionView.register(T.self, forCellWithReuseIdentifier: "PhotoItemCollectionViewCell")
         self.collectionView = collectionView
         self.collectionView?.backgroundView?.backgroundColor = .white
         self.collectionView?.backgroundColor = .white
     }
     
     func collectionLayout() -> UICollectionViewLayout {
-        let layout = VerticalCollectionViewLayout()
-        layout.delegate = self
-        return layout
+        return collectionViewLayout
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoItemCollectionViewCell", for: indexPath)
+        
+        if let photoCell = cell as? T {
+            photoCell.setup(with: dataSource[indexPath.row])
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectItem(dataSource[indexPath.row])
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y + scrollView.frame.height > scrollView.contentSize.height*0.9 {
+            delegate?.needsLoadMoreItems()
+        }
     }
     
 }
@@ -58,39 +88,5 @@ extension CollectionViewConfigurator : PhotosListShowing {
     func photosLoaded(_ array: [PhotoItemModel]) {
         dataSource.append(contentsOf: array.map( { PhotoItemViewModel(from: $0) }))
     }
-    
-}
-
-extension CollectionViewConfigurator : UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoItemCollectionViewCell", for: indexPath)
-        
-        if let photoCell = cell as? PhotoItemCollectionViewCell {
-            photoCell.setup(dataSource[indexPath.row])
-        }
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectItem(dataSource[indexPath.row])
-    }
-    
-}
-
-extension CollectionViewConfigurator : UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if scrollView.contentOffset.y + scrollView.frame.height > scrollView.contentSize.height*0.5 {
-            delegate?.needsLoadMoreItems()
-        }
-        
-    }
-    
     
 }

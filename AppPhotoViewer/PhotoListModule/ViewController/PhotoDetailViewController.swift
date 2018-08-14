@@ -27,9 +27,11 @@ class PhotoDetailViewController : UIViewController {
             self.navigationItem.title = viewModel.tagTitle.capitalized
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .white
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         collectionViewContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -47,11 +49,7 @@ class PhotoDetailViewController : UIViewController {
         collectionViewContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionViewContainer.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
         
-        collectionViewContainer.backgroundColor = .red
-        imageView.backgroundColor = .green
-        
         imageView.contentMode = .scaleAspectFit
-        
         
     }
     
