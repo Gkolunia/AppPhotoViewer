@@ -11,52 +11,53 @@ import UIKit
 class PhotoListCoordinator : CoordinatorProtocol {
     
     var rootNavigationController : UINavigationController?
-    private var loader : PhotosRequestManager = PhotosRequestManager(with: URLRequestBuilder(with: UnsplashServiceConstants()))
+    private var loader : PhotosPaginationLoader = PhotosPaginationLoader(PhotosRequestManager(with: URLRequestBuilder(with: UnsplashServiceConstants())))
+    private var mainPhotosListDataSource = VerticalCollectionViewDataSource()
     
     func start(from navigationController: UINavigationController) {
         
         rootNavigationController = navigationController
     
         let layout = VerticalCollectionViewLayout()
-        let configurator = CollectionViewConfigurator<PhotoItemCollectionViewCell>(with: layout)
+        let configurator = CollectionViewConfigurator<PhotoItemCollectionViewCell>(with: layout, mainPhotosListDataSource)
+        mainPhotosListDataSource.didSelectHandler = { item in
+            self.doSelecting(item)
+        }
         
-        layout.delegate = configurator
-        loader.delegate = configurator
+        layout.delegate = mainPhotosListDataSource
+        loader.delegate = mainPhotosListDataSource
         
         let controller = PhotoListViewController(configurator, loader)
-        controller.delegate = self
-        
-        configurator.delegate = controller
+
+        mainPhotosListDataSource.delegate = controller
         navigationController.show(controller, sender: nil)
+        
+        loader.initialLoadPhotos()
         
     }
 }
 
-extension PhotoListCoordinator: PhotoListViewControllerDelegate {
+extension PhotoListCoordinator {
     
     func doSelecting(_ item: PhotoItemViewModel) {
         let detailPhotoController  = PhotoDetailViewController(nibName: nil, bundle: nil)
-        detailPhotoController.viewModel = item
         
         let layout = HorizontalCollectionViewLayout()
-        let configurator = CollectionViewConfigurator<SmallPhotoItemCollectionViewCell>(with: layout)
+        let collectionViewDelegate = HorizontalCollectionViewDataSource()
+        collectionViewDelegate.dataSource = mainPhotosListDataSource.dataSource
+        collectionViewDelegate.didScrollToItem = { item in
+            detailPhotoController.viewModel = item
+        }
         
-        loader.delegate = configurator
+        
+        
+        let configurator = CollectionViewConfigurator<SmallPhotoItemCollectionViewCell>(with: layout, collectionViewDelegate)
+        
+        loader.delegate = collectionViewDelegate
         
         let photoListController = PhotoListViewController(configurator, loader)
-        
-        
-        detailPhotoController.addChildViewController(photoListController)
-        detailPhotoController.collectionViewContainer.addSubview(photoListController.view)
-        
-        photoListController.view.translatesAutoresizingMaskIntoConstraints = false
-        photoListController.view.topAnchor.constraint(equalTo: detailPhotoController.collectionViewContainer.topAnchor).isActive = true
-        photoListController.view.bottomAnchor.constraint(equalTo: detailPhotoController.collectionViewContainer.bottomAnchor).isActive = true
-        photoListController.view.leadingAnchor.constraint(equalTo: detailPhotoController.collectionViewContainer.leadingAnchor).isActive = true
-        photoListController.view.trailingAnchor.constraint(equalTo: detailPhotoController.collectionViewContainer.trailingAnchor).isActive = true
-        
-        photoListController.didMove(toParentViewController: detailPhotoController)
-        
+        detailPhotoController.setupChildPhotosController(photoListController)
+        detailPhotoController.viewModel = item
         rootNavigationController?.show(detailPhotoController, sender: nil)
     }
     

@@ -13,17 +13,19 @@ class PhotoDetailViewController : UIViewController {
     
     let imageView : UIImageView = UIImageView(frame: CGRect())
     let collectionViewContainer : UIView = UIView(frame: CGRect())
+    weak var photoListController : PhotoListViewController?
     
     var viewModel : PhotoItemViewModel! {
         didSet {
             // Firstly set image which is already loaded and then load full size image.
             let image = ImageCache.shared[ImageRequest(url: viewModel.smallImageUrl)]
-            self.imageView.image = image
 
-            ImagePipeline.shared.loadImage(with: viewModel.largeImageUrl, progress: nil) { (response, error) in
+            let imageLoadingOptions = ImageLoadingOptions(placeholder: image, transition: nil, failureImage: nil, failureImageTransition: nil, contentModes: nil)
+
+            Nuke.loadImage(with: viewModel.largeImageUrl, options: imageLoadingOptions, into: imageView, progress: nil) { (response, error) in
                 self.imageView.image = response?.image
             }
-            
+
             self.navigationItem.title = viewModel.tagTitle.capitalized
         }
     }
@@ -50,6 +52,22 @@ class PhotoDetailViewController : UIViewController {
         collectionViewContainer.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
         
         imageView.contentMode = .scaleAspectFit
+        
+    }
+    
+    func setupChildPhotosController(_ photoListController: PhotoListViewController) {
+        self.photoListController = photoListController
+        
+        self.addChildViewController(photoListController)
+        self.collectionViewContainer.addSubview(photoListController.view)
+        
+        photoListController.view.translatesAutoresizingMaskIntoConstraints = false
+        photoListController.view.topAnchor.constraint(equalTo: self.collectionViewContainer.topAnchor).isActive = true
+        photoListController.view.bottomAnchor.constraint(equalTo: self.collectionViewContainer.bottomAnchor).isActive = true
+        photoListController.view.leadingAnchor.constraint(equalTo: self.collectionViewContainer.leadingAnchor).isActive = true
+        photoListController.view.trailingAnchor.constraint(equalTo: self.collectionViewContainer.trailingAnchor).isActive = true
+        
+        photoListController.didMove(toParentViewController: self)
         
     }
     
