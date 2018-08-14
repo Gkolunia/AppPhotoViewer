@@ -33,9 +33,12 @@ class HorizontalCollectionViewLayout : UICollectionViewLayout {
         guard cache.isEmpty == true, let collectionView = collectionView else {
             return
         }
+        
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: collectionView.bounds.width/2)
+        
         let widthCell = cellPadding*2 + collectionView.frame.size.height/2
         let heightCell = collectionView.frame.size.height
-        var xOffset : CGFloat = 0
+        var xOffset : CGFloat = collectionView.frame.size.width/2
         
         
         for item in 0..<collectionView.numberOfItems(inSection: 0) {
@@ -51,10 +54,7 @@ class HorizontalCollectionViewLayout : UICollectionViewLayout {
             contentWidth = max(contentWidth, frame.maxX)
             
             xOffset = xOffset + widthCell
-            //            yOffset[column] = yOffset[column] + heightCell
-            
-            //            column = column < (numberOfColumns - 1) ? (column + 1) : 0
-            
+
         }
         
     }
