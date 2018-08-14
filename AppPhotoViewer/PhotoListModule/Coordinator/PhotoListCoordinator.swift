@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoListCoordinator : CoordinatorProtocol {
     
-    var rootNavigationController : UINavigationController?
+    weak var rootNavigationController : UINavigationController?
     private var loader : PhotosPaginationLoader = PhotosPaginationLoader(PhotosRequestManager(with: URLRequestBuilder(with: UnsplashServiceConstants())))
     private var mainPhotosListHelper = VerticalCollectionViewHelper()
     private weak var detailPhotoListHelper : HorizontalCollectionViewHelper?

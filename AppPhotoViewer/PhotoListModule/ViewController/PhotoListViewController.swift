@@ -34,11 +34,11 @@ class PhotoListViewController : UIViewController, GenericCollectionViewEventsDel
     }
     
     override func viewDidLoad() {
+        self.navigationItem.title = "Photos"
         let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: collectionViewConfigurator.collectionLayout())
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         collectionViewConfigurator.configurate(collectionView)
         view.addSubview(collectionView)
-        self.navigationItem.title = "Photos"
         self.collectionView = collectionView
     }
     

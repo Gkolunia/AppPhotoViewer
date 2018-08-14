@@ -13,7 +13,6 @@ typealias CompletionHandler<T> = (_ succes: Bool, _ object: T?,_ errorMessage: E
 
 /// Base errors for network service
 fileprivate struct NetworkDomainErrors {
-    static let noInternetConnection : ErrorMessage = ("No Internet Connection!", "Please connect to WiFi to see the latest data.")
     static let somethingGoesWrong : ErrorMessage = ("Something goes wrong.", nil)
 }
 
@@ -27,13 +26,13 @@ class APIRequestManager {
         session = urlSession
     }
     
-    /// Executes url request which is returned from makeRequest function.
+    /// Build and Executes url request.
     ///
     /// - Parameters:
     ///   - urlString: path of API URL
     ///   - httpParams: Header parameters of request
     ///   - requestType: HTTP type request
-    ///   - handler: Callback is called when url requst is finished
+    ///   - handler: Callback is called when url request is finished
     func makeAndDoRequest<T: Codable>(_ urlString: String, _ httpParams: [String : String]? = nil, _ requestType: RequestType, handler: @escaping CompletionHandler<T>) {
         if let request = builder.setParams(httpParams).setPath(urlString).setReuestType(requestType).build() {
             let task = session.dataTask(with: request, completionHandler: responseHandler(with: handler))

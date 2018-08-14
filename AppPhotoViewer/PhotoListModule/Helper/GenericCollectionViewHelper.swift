@@ -24,7 +24,7 @@ extension GenericCell {
     }
 }
 
-class GenericCollectionViewHelper<CellType: GenericCell>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
+class GenericCollectionViewHelper<CellType: GenericCell>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
     weak var collectionView : UICollectionView?
     weak var delegate : GenericCollectionViewEventsDelegate?
