@@ -18,7 +18,7 @@ struct Tag : Codable {
 }
 
 struct PhotoItemModel : Codable {
-    
+    let id : String
     let urls : PhotoUrls
     let likes : Int
     let width : Int
