@@ -58,9 +58,7 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
     
     func indexPath(for item: PhotoItemViewModel) -> IndexPath? {
         
-        let index = dataSource.index { (itemInArray) -> Bool in
-            return itemInArray.id == item.id
-        }
+        let index = dataSource.index(where: { $0 == item })
         
         if let index = index {
             return IndexPath(row: index, section: 0)
