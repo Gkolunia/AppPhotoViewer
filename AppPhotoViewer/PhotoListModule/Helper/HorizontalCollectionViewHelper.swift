@@ -34,8 +34,8 @@ class HorizontalCollectionViewHelper: GenericCollectionViewHelper<SmallPhotoItem
     }
 }
 
-extension HorizontalCollectionViewHelper : PhotosListShowing {
-    func photosLoaded(_ array: [PhotoItemModel]) {
-        dataSource.append(contentsOf: array.map( { PhotoItemViewModel(from: $0) }))
-    }
-}
+//extension HorizontalCollectionViewHelper : PhotosListShowing {
+//    func photosLoaded(_ array: [PhotoItemModel]) {
+//        dataSource.append(contentsOf: array.map( { PhotoItemViewModel(from: $0) }))
+//    }
+//}

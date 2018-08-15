@@ -12,8 +12,6 @@ class PhotoListCoordinator : CoordinatorProtocol {
     
     var rootNavigationController : UINavigationController?
     private let loader : PhotosPaginationLoader
-    private var mainPhotosListHelper = VerticalCollectionViewHelper()
-    private weak var detailPhotoListHelper : HorizontalCollectionViewHelper?
     
     init() {
         let urlRequestBuilder = URLRequestBuilder()
@@ -22,8 +20,8 @@ class PhotoListCoordinator : CoordinatorProtocol {
     
     func start(from navigationController: UINavigationController) {
         
+        let mainPhotosListHelper = VerticalCollectionViewHelper()
         rootNavigationController = navigationController
-        loader.delegate = mainPhotosListHelper
         mainPhotosListHelper.didSelectHandler = {[weak self] item in
             self?.doSelecting(item)
         }
@@ -34,6 +32,7 @@ class PhotoListCoordinator : CoordinatorProtocol {
         let configurator = CollectionViewConfigurator<PhotoItemCollectionViewCell>(with: layout, mainPhotosListHelper)
         
         let controller = PhotoListViewController(configurator, loader)
+        loader.delegate = controller
         mainPhotosListHelper.delegate = controller
         
         navigationController.show(controller, sender: nil)
@@ -51,25 +50,22 @@ extension PhotoListCoordinator {
         
         let layout = HorizontalCollectionViewLayout()
         let collectionViewHelper = HorizontalCollectionViewHelper()
-        collectionViewHelper.dataSource = mainPhotosListHelper.dataSource
         collectionViewHelper.didScrollToItem = { item in
             detailPhotoController.viewModel = item
             detailPhotoController.currentIndexPath = collectionViewHelper.indexPath(for: item)
         }
 
         let configurator = CollectionViewConfigurator<SmallPhotoItemCollectionViewCell>(with: layout, collectionViewHelper)
-        
-        loader.delegate = collectionViewHelper
-        
+
         let photoListController = PhotoListViewController(configurator, loader)
+        loader.delegate = photoListController
         collectionViewHelper.delegate = photoListController
         detailPhotoController.setupChildPhotosController(photoListController)
         detailPhotoController.viewModel = item
         detailPhotoController.currentIndexPath = collectionViewHelper.indexPath(for: item)
         
         rootNavigationController?.show(detailPhotoController, sender: nil)
-        
-        detailPhotoListHelper = collectionViewHelper
+
     }
     
 }
@@ -77,13 +73,17 @@ extension PhotoListCoordinator {
 extension PhotoListCoordinator : PhotoDetailViewControllerDelegate {
     
     func doDissmiss(with detailViewcontroller: PhotoDetailViewController) {
-        loader.delegate = mainPhotosListHelper
-        if let updatedDataSource = detailPhotoListHelper?.dataSource {
-            mainPhotosListHelper.dataSource = updatedDataSource
-            if let indexPath = detailViewcontroller.currentIndexPath {
-                mainPhotosListHelper.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
-            }
-        }
+//        loader.delegate = mainPhotosListHelper
+        
+        
+//        if let updatedDataSource = detailPhotoListHelper?.dataSource {
+//            mainPhotosListHelper.dataSource = updatedDataSource
+//            if let indexPath = detailViewcontroller.currentIndexPath {
+//                mainPhotosListHelper.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
+//            }
+//        }
+        
+        
     }
     
 }

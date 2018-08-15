@@ -22,9 +22,9 @@ class VerticalCollectionViewHelper : GenericCollectionViewHelper<PhotoItemCollec
     }
 }
 
-extension VerticalCollectionViewHelper : PhotosListShowing {
-    func photosLoaded(_ array: [PhotoItemModel]) {
-        dataSource.append(contentsOf: array.map( { PhotoItemViewModel(from: $0) }))
-    }
-}
+//extension VerticalCollectionViewHelper : PhotosListShowing {
+//    func photosLoaded(_ array: [PhotoItemModel]) {
+//        dataSource.append(contentsOf: array.map( { PhotoItemViewModel(from: $0) }))
+//    }
+//}
 

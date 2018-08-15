@@ -47,3 +47,11 @@ class PhotoListViewController : UIViewController, GenericCollectionViewEventsDel
     }
     
 }
+
+extension PhotoListViewController : PhotosListShowing {
+    
+    func photosLoaded(_ array: [PhotoItemModel]) {
+//        dataSource.append(contentsOf: array.map( { PhotoItemViewModel(from: $0) }))
+    }
+    
+}
