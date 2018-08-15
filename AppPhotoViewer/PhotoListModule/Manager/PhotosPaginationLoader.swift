@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol PhotosListShowing : class {
-    func photosLoaded(_ array: [PhotoItemModel])
+    func photosLoaded(_ newElements: [PhotoItemModel])
 }
 
 class PhotosPaginationLoader : PhotosLoader {
@@ -21,8 +21,6 @@ class PhotosPaginationLoader : PhotosLoader {
     var currentPage : Int = 1
     var isLoading : Bool = false
     
-    var dataSource = [PhotoItemModel]()
-    
     init(_ requestManager: PhotosRequestManagerProtocol) {
         photoRequestManager = requestManager
     }
@@ -31,7 +29,6 @@ class PhotosPaginationLoader : PhotosLoader {
         photoRequestManager.getLatestPhotos(currentPage, 100) { (success, response, error) in
             if let response = response {
                 self.delegate?.photosLoaded(response.results)
-                self.dataSource.append(contentsOf: response.results)
             }
         }
     }
@@ -39,13 +36,10 @@ class PhotosPaginationLoader : PhotosLoader {
     func loadMore() {
         if !isLoading {
             isLoading = true
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             photoRequestManager.getLatestPhotos(currentPage+1, 30) { (success, response, error) in
                 if let response = response {
                     self.delegate?.photosLoaded(response.results)
-                    self.dataSource.append(contentsOf: response.results)
                 }
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.isLoading = false
                 self.currentPage = self.currentPage+1
             }
