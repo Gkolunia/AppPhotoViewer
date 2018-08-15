@@ -10,7 +10,7 @@ import UIKit
 import Nuke
 
 protocol PhotoDetailViewControllerDelegate : class {
-    func doDissmiss(with detailViewcontroller: PhotoDetailViewController)
+    func doDissmiss(with allItems: [PhotoItemViewModel])
 }
 
 class PhotoDetailViewController : UIViewController {
@@ -77,7 +77,7 @@ class PhotoDetailViewController : UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        delegate?.doDissmiss(with: self)
+        delegate?.doDissmiss(with: photoListController!.collectionViewHelper.allItems())
     }
     
     func setupChildPhotosController(_ photoListController: PhotoListViewController) {

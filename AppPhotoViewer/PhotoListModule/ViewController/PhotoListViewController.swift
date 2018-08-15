@@ -16,6 +16,8 @@ protocol PhotosCollectionViewUpdater : UICollectionViewDelegate, UICollectionVie
     func append(_ newElements: [PhotoItemModel])
     func collectionViewCellType() -> (cellClass: AnyClass, cellId: String)
     var collectionView : UICollectionView? { get set }
+    func allItems() -> [PhotoItemViewModel]
+    func setNewDataSource(_ newDataSource:[PhotoItemViewModel])
 }
 
 class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDelegate {

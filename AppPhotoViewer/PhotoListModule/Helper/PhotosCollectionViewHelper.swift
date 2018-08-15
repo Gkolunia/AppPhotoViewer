@@ -28,8 +28,12 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
     weak var collectionView : UICollectionView?
     weak var delegate : PhotosCollectionViewEventsDelegate?
     
-    var didSelectHandler : ((PhotoItemViewModel) -> ())?
-    var dataSource :  [PhotoItemViewModel] = [PhotoItemViewModel]()
+    var didSelectHandler : ((IndexPath, [PhotoItemViewModel]) -> ())?
+    var dataSource :  [PhotoItemViewModel]
+    
+    init(with dataSource: [PhotoItemViewModel] = [PhotoItemViewModel]()) {
+        self.dataSource = dataSource
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
@@ -45,7 +49,7 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectHandler?(dataSource[indexPath.row])
+        didSelectHandler?(indexPath, dataSource)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -77,6 +81,15 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
     
     func collectionViewCellType() -> (cellClass: AnyClass, cellId: String) {
         return (CellType.self, CellType.reuseId())
+    }
+    
+    func allItems() -> [PhotoItemViewModel] {
+        return dataSource
+    }
+    
+    func setNewDataSource(_ newDataSource: [PhotoItemViewModel]) {
+        dataSource = newDataSource
+        collectionView?.reloadData()
     }
 
 }
