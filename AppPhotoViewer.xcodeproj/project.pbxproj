@@ -34,7 +34,7 @@
 		A355715A2122B06700CF52F0 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35571592122B06700CF52F0 /* PhotoDetailViewController.swift */; };
 		A355715C2123081000CF52F0 /* SmallPhotoItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355715B2123081000CF52F0 /* SmallPhotoItemCollectionViewCell.swift */; };
 		A355715E2123264800CF52F0 /* PhotosPaginationLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355715D2123264800CF52F0 /* PhotosPaginationLoader.swift */; };
-		A355716121233A2300CF52F0 /* GenericCollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355716021233A2300CF52F0 /* GenericCollectionViewHelper.swift */; };
+		A355716121233A2300CF52F0 /* PhotosCollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A355716021233A2300CF52F0 /* PhotosCollectionViewHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +100,7 @@
 		A35571592122B06700CF52F0 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		A355715B2123081000CF52F0 /* SmallPhotoItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPhotoItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		A355715D2123264800CF52F0 /* PhotosPaginationLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPaginationLoader.swift; sourceTree = "<group>"; };
-		A355716021233A2300CF52F0 /* GenericCollectionViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCollectionViewHelper.swift; sourceTree = "<group>"; };
+		A355716021233A2300CF52F0 /* PhotosCollectionViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +133,7 @@
 		A33CCE51212354660016E809 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				A355716021233A2300CF52F0 /* GenericCollectionViewHelper.swift */,
+				A355716021233A2300CF52F0 /* PhotosCollectionViewHelper.swift */,
 				A33CCE522123548C0016E809 /* VerticalCollectionViewHelper.swift */,
 				A33CCE54212354970016E809 /* HorizontalCollectionViewHelper.swift */,
 			);
@@ -428,7 +428,7 @@
 				A355715E2123264800CF52F0 /* PhotosPaginationLoader.swift in Sources */,
 				A355715C2123081000CF52F0 /* SmallPhotoItemCollectionViewCell.swift in Sources */,
 				A33CCE532123548C0016E809 /* VerticalCollectionViewHelper.swift in Sources */,
-				A355716121233A2300CF52F0 /* GenericCollectionViewHelper.swift in Sources */,
+				A355716121233A2300CF52F0 /* PhotosCollectionViewHelper.swift in Sources */,
 				A355713921201F0E00CF52F0 /* PhotoListViewController.swift in Sources */,
 				A3557136212014B800CF52F0 /* PhotosRequestManager.swift in Sources */,
 				A355714D2121FA0000CF52F0 /* HorizontalCollectionViewLayout.swift in Sources */,

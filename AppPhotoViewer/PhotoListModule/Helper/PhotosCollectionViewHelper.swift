@@ -12,31 +12,24 @@ protocol GenericCollectionViewEventsDelegate : class {
     func needsLoadMoreItems()
 }
 
-protocol GenericCell : class {
-    associatedtype GenericCellItemViewModel : EquatableItem
-    func setup(with item: GenericCellItemViewModel)
+protocol PhotoCellProtocol : class {
+    func setup(with item: PhotoItemViewModel)
     static func reuseId() -> String
 }
 
-extension GenericCell {
+extension PhotoCellProtocol {
     static func reuseId() -> String {
         return "GenericCellId"
     }
 }
 
-class GenericCollectionViewHelper<CellType: GenericCell>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
-    
+class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, PhotosCollectionViewUpdater {
+
     weak var collectionView : UICollectionView?
     weak var delegate : GenericCollectionViewEventsDelegate?
     
-    var didSelectHandler : ((CellType.GenericCellItemViewModel) -> ())?
-    var dataSource :  [CellType.GenericCellItemViewModel] = [CellType.GenericCellItemViewModel]() {
-        didSet {
-            self.collectionView?.collectionViewLayout.prepare()
-            let indexPath : [IndexPath] = (oldValue.count..<dataSource.count).map({IndexPath(row: $0, section: 0)})
-            self.collectionView?.insertItems(at: indexPath)
-        }
-    }
+    var didSelectHandler : ((PhotoItemViewModel) -> ())?
+    var dataSource :  [PhotoItemViewModel] = [PhotoItemViewModel]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
@@ -59,7 +52,7 @@ class GenericCollectionViewHelper<CellType: GenericCell>: NSObject, UICollection
         // For purpose to override in inherited classes.
     }
     
-    func indexPath(for item: CellType.GenericCellItemViewModel) -> IndexPath? {
+    func indexPath(for item: PhotoItemViewModel) -> IndexPath? {
         
         let index = dataSource.index { (itemInArray) -> Bool in
             return itemInArray.id == item.id
@@ -72,4 +65,20 @@ class GenericCollectionViewHelper<CellType: GenericCell>: NSObject, UICollection
         return nil
     }
     
+    //MARK: PhotosCollectionViewUpdater
+    func append(_ newElements: [PhotoItemModel]) {
+        
+        let newViewModels = newElements.compactMap({ PhotoItemViewModel(from: $0) })
+        let oldCount = dataSource.count
+        dataSource.append(contentsOf: newViewModels)
+
+        self.collectionView?.collectionViewLayout.prepare()
+        let indexPath : [IndexPath] = (oldCount..<dataSource.count).map({IndexPath(row: $0, section: 0)})
+        self.collectionView?.insertItems(at: indexPath)
+    }
+    
+    func collectionViewCellType() -> (cellClass: AnyClass, cellId: String) {
+        return (CellType.self, CellType.reuseId())
+    }
+
 }

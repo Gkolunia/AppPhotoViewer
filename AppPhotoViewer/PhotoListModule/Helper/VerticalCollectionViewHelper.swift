@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VerticalCollectionViewHelper : GenericCollectionViewHelper<PhotoItemCollectionViewCell>, VerticalCollectionViewLayoutDelegate {
+class VerticalCollectionViewHelper : PhotosCollectionViewHelper<PhotoItemCollectionViewCell>, VerticalCollectionViewLayoutDelegate {
     
     func collectionView(_ collectionView: UICollectionView, sizeForPhotoAtIndexPath: IndexPath) -> CGSize {
         let item = dataSource[sizeForPhotoAtIndexPath.item]
@@ -21,10 +21,3 @@ class VerticalCollectionViewHelper : GenericCollectionViewHelper<PhotoItemCollec
         }
     }
 }
-
-//extension VerticalCollectionViewHelper : PhotosListShowing {
-//    func photosLoaded(_ array: [PhotoItemModel]) {
-//        dataSource.append(contentsOf: array.map( { PhotoItemViewModel(from: $0) }))
-//    }
-//}
-

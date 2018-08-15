@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HorizontalCollectionViewHelper: GenericCollectionViewHelper<SmallPhotoItemCollectionViewCell> {
+class HorizontalCollectionViewHelper: PhotosCollectionViewHelper<SmallPhotoItemCollectionViewCell> {
     
     var didScrollToItem : ((PhotoItemViewModel) -> ())?
     
@@ -33,9 +33,3 @@ class HorizontalCollectionViewHelper: GenericCollectionViewHelper<SmallPhotoItem
         
     }
 }
-
-//extension HorizontalCollectionViewHelper : PhotosListShowing {
-//    func photosLoaded(_ array: [PhotoItemModel]) {
-//        dataSource.append(contentsOf: array.map( { PhotoItemViewModel(from: $0) }))
-//    }
-//}
