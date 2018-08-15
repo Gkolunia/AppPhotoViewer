@@ -26,7 +26,7 @@ class PhotoItemCollectionViewCell : UICollectionViewCell, PhotoCellProtocol {
     }
     
     func setup(with item: CellGenericItem) {
-        Nuke.loadImage(with: item.smallImageUrl, into: imageView)
+        PhotosImageLoadManager.loadImage(item.smallImageUrl, nil, imageView)
         countLikesLabel.text = String(item.likes)
     }
     

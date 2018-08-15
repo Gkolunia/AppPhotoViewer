@@ -25,7 +25,7 @@ class SmallPhotoItemCollectionViewCell : UICollectionViewCell, PhotoCellProtocol
     }
     
     func setup(with item: CellGenericItem) {
-        Nuke.loadImage(with: item.smallImageUrl, into: imageView)
+        PhotosImageLoadManager.loadImage(item.smallImageUrl, nil, imageView)
     }
     
     private func configurateAppearenceAndConstraints() {

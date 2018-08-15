@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Nuke
 
 protocol PhotoDetailViewControllerDelegate : class {
     func doDissmiss(with allItems: [PhotoItemViewModel])
@@ -22,21 +21,11 @@ class PhotoDetailViewController : UIViewController {
     
     var viewModel : PhotoItemViewModel? {
         didSet {
-            
             guard let viewModel = viewModel else {
                 return
             }
             if let oldValue = oldValue, viewModel.id == oldValue.id { return }
-            
-            // Firstly set image which is already loaded and then load full size image.
-            let image = ImageCache.shared[ImageRequest(url: viewModel.smallImageUrl)]
-
-            let imageLoadingOptions = ImageLoadingOptions(placeholder: image, transition: nil, failureImage: nil, failureImageTransition: nil, contentModes: nil)
-
-            Nuke.loadImage(with: viewModel.largeImageUrl, options: imageLoadingOptions, into: imageView, progress: nil) { (response, error) in
-                self.imageView.image = response?.image
-            }
-
+            PhotosImageLoadManager.loadImage(viewModel.smallImageUrl, viewModel.largeImageUrl, imageView)
             self.navigationItem.title = viewModel.tagTitle.capitalized
         }
     }

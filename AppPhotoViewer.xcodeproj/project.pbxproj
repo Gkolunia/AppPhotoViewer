@@ -10,6 +10,7 @@
 		5DF6B87521240E5B0020A823 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF6B87421240E5B0020A823 /* Nuke.framework */; };
 		5DF6B87621240E650020A823 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF6B87421240E5B0020A823 /* Nuke.framework */; };
 		5DF6B87721240E650020A823 /* Nuke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF6B87421240E5B0020A823 /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A31713022124EA7E006A8869 /* PhotosImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31713012124EA7E006A8869 /* PhotosImageLoadManager.swift */; };
 		A33CCE532123548C0016E809 /* VerticalCollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33CCE522123548C0016E809 /* VerticalCollectionViewHelper.swift */; };
 		A33CCE55212354970016E809 /* HorizontalCollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33CCE54212354970016E809 /* HorizontalCollectionViewHelper.swift */; };
 		A33CCE572123807F0016E809 /* URLRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33CCE562123807F0016E809 /* URLRequestBuilderTests.swift */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		5DF6B87421240E5B0020A823 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = SOURCE_ROOT; };
+		A31713012124EA7E006A8869 /* PhotosImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosImageLoadManager.swift; sourceTree = "<group>"; };
 		A33CCE522123548C0016E809 /* VerticalCollectionViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCollectionViewHelper.swift; sourceTree = "<group>"; };
 		A33CCE54212354970016E809 /* HorizontalCollectionViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewHelper.swift; sourceTree = "<group>"; };
 		A33CCE562123807F0016E809 /* URLRequestBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderTests.swift; sourceTree = "<group>"; };
@@ -128,6 +130,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A31713032124EDE3006A8869 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A31713012124EA7E006A8869 /* PhotosImageLoadManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		A33CCE51212354660016E809 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +171,7 @@
 		A35570F0211EF91B00CF52F0 /* AppPhotoViewer */ = {
 			isa = PBXGroup;
 			children = (
+				A31713032124EDE3006A8869 /* Utils */,
 				5DF6B87421240E5B0020A823 /* Nuke.framework */,
 				A35571302120149200CF52F0 /* PhotoListModule */,
 				A3557128212013DD00CF52F0 /* APIRequestManager */,
@@ -423,6 +434,7 @@
 				A3557134212014AE00CF52F0 /* PhotoItemModel.swift in Sources */,
 				A355715E2123264800CF52F0 /* PhotosPaginationLoader.swift in Sources */,
 				A355715C2123081000CF52F0 /* SmallPhotoItemCollectionViewCell.swift in Sources */,
+				A31713022124EA7E006A8869 /* PhotosImageLoadManager.swift in Sources */,
 				A33CCE532123548C0016E809 /* VerticalCollectionViewHelper.swift in Sources */,
 				A355716121233A2300CF52F0 /* PhotosCollectionViewHelper.swift in Sources */,
 				A355713921201F0E00CF52F0 /* PhotoListViewController.swift in Sources */,
