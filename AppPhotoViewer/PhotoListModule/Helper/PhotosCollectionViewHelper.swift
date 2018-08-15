@@ -67,11 +67,9 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
     
     //MARK: PhotosCollectionViewUpdater
     func append(_ newElements: [PhotoItemModel]) {
-        
         let newViewModels = newElements.compactMap({ PhotoItemViewModel(from: $0) })
         let oldCount = dataSource.count
         dataSource.append(contentsOf: newViewModels)
-
         self.collectionView?.collectionViewLayout.prepare()
         let indexPath : [IndexPath] = (oldCount..<dataSource.count).map({IndexPath(row: $0, section: 0)})
         self.collectionView?.insertItems(at: indexPath)

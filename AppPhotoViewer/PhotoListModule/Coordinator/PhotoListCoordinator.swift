@@ -29,9 +29,7 @@ class PhotoListCoordinator : CoordinatorProtocol {
         let layout = VerticalCollectionViewLayout()
         layout.delegate = mainPhotosListHelper
         
-        let configurator = CollectionViewConfigurator<PhotoItemCollectionViewCell>(with: layout, mainPhotosListHelper)
-        
-        let controller = PhotoListViewController(configurator, loader)
+        let controller = PhotoListViewController(loader, mainPhotosListHelper, layout)
         loader.delegate = controller
         mainPhotosListHelper.delegate = controller
         
@@ -55,9 +53,7 @@ extension PhotoListCoordinator {
             detailPhotoController.currentIndexPath = collectionViewHelper.indexPath(for: item)
         }
 
-        let configurator = CollectionViewConfigurator<SmallPhotoItemCollectionViewCell>(with: layout, collectionViewHelper)
-
-        let photoListController = PhotoListViewController(configurator, loader)
+        let photoListController = PhotoListViewController(loader, collectionViewHelper, layout)
         loader.delegate = photoListController
         collectionViewHelper.delegate = photoListController
         detailPhotoController.setupChildPhotosController(photoListController)

@@ -15,6 +15,7 @@ protocol PhotosLoader {
 protocol PhotosCollectionViewUpdater : UICollectionViewDelegate, UICollectionViewDataSource {
     func append(_ newElements: [PhotoItemModel])
     func collectionViewCellType() -> (cellClass: AnyClass, cellId: String)
+    var collectionView : UICollectionView? { get set }
 }
 
 class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDelegate {
@@ -27,6 +28,7 @@ class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDele
         self.photosLoader = loader
         self.collectionViewHelper = collectionViewHelper
         self.collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
+        collectionViewHelper.collectionView = collectionView
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -53,6 +55,7 @@ class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDele
     func needsLoadMoreItems() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         photosLoader.loadMore()
+        
     }
     
 }

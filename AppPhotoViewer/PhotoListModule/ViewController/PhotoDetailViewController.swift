@@ -71,7 +71,7 @@ class PhotoDetailViewController : UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let indexPath = currentIndexPath {
-            photoListController?.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            photoListController?.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
     }
     
