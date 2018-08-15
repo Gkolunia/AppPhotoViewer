@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GenericCollectionViewEventsDelegate : class {
+protocol PhotosCollectionViewEventsDelegate : class {
     func needsLoadMoreItems()
 }
 
@@ -26,7 +26,7 @@ extension PhotoCellProtocol {
 class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, PhotosCollectionViewUpdater {
 
     weak var collectionView : UICollectionView?
-    weak var delegate : GenericCollectionViewEventsDelegate?
+    weak var delegate : PhotosCollectionViewEventsDelegate?
     
     var didSelectHandler : ((PhotoItemViewModel) -> ())?
     var dataSource :  [PhotoItemViewModel] = [PhotoItemViewModel]()

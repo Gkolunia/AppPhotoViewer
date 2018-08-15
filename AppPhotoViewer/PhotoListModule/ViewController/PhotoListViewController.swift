@@ -17,7 +17,7 @@ protocol PhotosCollectionViewUpdater : UICollectionViewDelegate, UICollectionVie
     func collectionViewCellType() -> (cellClass: AnyClass, cellId: String)
 }
 
-class PhotoListViewController : UIViewController, GenericCollectionViewEventsDelegate {
+class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDelegate {
 
     let photosLoader : PhotosLoader
     let collectionView : UICollectionView
