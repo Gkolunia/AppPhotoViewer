@@ -8,24 +8,25 @@
 
 import UIKit
 
-protocol PhotosCollectionViewConfigurator {
-    func configurate(_ collectionView: UICollectionView)
-    func collectionLayout() -> UICollectionViewLayout
-}
-
 protocol PhotosLoader {
     func loadMore()
 }
 
+protocol PhotosCollectionViewUpdater : UICollectionViewDelegate, UICollectionViewDataSource {
+    func append(_ newElements: [PhotoItemModel])
+    func collectionViewCellType() -> (cellClass: AnyClass, cellId: String)
+}
+
 class PhotoListViewController : UIViewController, GenericCollectionViewEventsDelegate {
 
-    let collectionViewConfigurator : PhotosCollectionViewConfigurator
     let photosLoader : PhotosLoader
-    weak var collectionView : UICollectionView?
+    let collectionView : UICollectionView
+    let collectionViewHelper : PhotosCollectionViewUpdater
     
-    init(_ configurator:PhotosCollectionViewConfigurator, _ loader: PhotosLoader) {
-        collectionViewConfigurator = configurator
-        photosLoader = loader
+    init(_ loader: PhotosLoader, _ collectionViewHelper: PhotosCollectionViewUpdater, _ layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
+        self.photosLoader = loader
+        self.collectionViewHelper = collectionViewHelper
+        self.collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,14 +36,22 @@ class PhotoListViewController : UIViewController, GenericCollectionViewEventsDel
     
     override func viewDidLoad() {
         self.navigationItem.title = "Photos"
-        let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: collectionViewConfigurator.collectionLayout())
+        
+        collectionView.frame = self.view.bounds
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        collectionViewConfigurator.configurate(collectionView)
+        collectionView.dataSource = collectionViewHelper
+        collectionView.delegate = collectionViewHelper
+        collectionView.register(collectionViewHelper.collectionViewCellType().cellClass, forCellWithReuseIdentifier: collectionViewHelper.collectionViewCellType().cellId)
+        collectionView.backgroundView?.backgroundColor = .white
+        collectionView.backgroundColor = .white
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        
         view.addSubview(collectionView)
-        self.collectionView = collectionView
     }
     
     func needsLoadMoreItems() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         photosLoader.loadMore()
     }
     
@@ -50,8 +59,9 @@ class PhotoListViewController : UIViewController, GenericCollectionViewEventsDel
 
 extension PhotoListViewController : PhotosListShowing {
     
-    func photosLoaded(_ array: [PhotoItemModel]) {
-//        dataSource.append(contentsOf: array.map( { PhotoItemViewModel(from: $0) }))
+    func photosLoaded(_ newElements: [PhotoItemModel]) {
+        collectionViewHelper.append(newElements)
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
 }
