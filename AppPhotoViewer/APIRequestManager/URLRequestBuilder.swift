@@ -13,18 +13,21 @@ enum RequestType: String {
     case post = "POST"
 }
 
-protocol ServiceConstants {
-    var host : String { get }
-    var scheme : String { get }
-    var httpHeaderFields : [String : String] { get }
-}
+fileprivate let unsplash = "api.unsplash.com"
+fileprivate let unsplashScheme = "https"
+fileprivate let unsplasHeaderFields : [String : String] = ["AcceptVersion" : "v1",
+                                                           "Authorization" : "Client-ID c1717fdbec79a4749bc691e090050acdfbea76fcd9d29c1fa9a5e8bacb83df46"]
 
-/// Constants needed for creating base url.
-struct UnsplashServiceConstants : ServiceConstants {
-    let host = "api.unsplash.com"
-    let scheme = "https"
-    let httpHeaderFields : [String : String] = ["AcceptVersion" : "v1",
-                                                "Authorization" : "Client-ID c1717fdbec79a4749bc691e090050acdfbea76fcd9d29c1fa9a5e8bacb83df46"]
+struct APIConstants {
+    let host : String
+    let scheme : String
+    let httpHeaderFields : [String : String]
+    
+    init(_ hostName: String, _ hostScheme: String, _ headerFields: [String : String]) {
+        host = hostName
+        scheme = hostScheme
+        httpHeaderFields = headerFields
+    }
 }
 
 protocol URLRequestBuilderProtocol {
@@ -40,7 +43,7 @@ class URLRequestBuilder : URLRequestBuilderProtocol {
     private var requestType : RequestType = .get
     private var httpHeaderFields : [String : String]?
     
-    init(with hostParams: ServiceConstants) {
+    init(with hostParams: APIConstants = APIConstants(unsplash, unsplashScheme, unsplasHeaderFields)) {
         urlComponents = URLComponents()
         urlComponents.scheme = hostParams.scheme
         urlComponents.host = hostParams.host

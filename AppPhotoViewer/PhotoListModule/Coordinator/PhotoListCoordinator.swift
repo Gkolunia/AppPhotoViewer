@@ -11,9 +11,14 @@ import UIKit
 class PhotoListCoordinator : CoordinatorProtocol {
     
     var rootNavigationController : UINavigationController?
-    private var loader : PhotosPaginationLoader = PhotosPaginationLoader(PhotosRequestManager(with: URLRequestBuilder(with: UnsplashServiceConstants())))
+    private let loader : PhotosPaginationLoader
     private var mainPhotosListHelper = VerticalCollectionViewHelper()
     private weak var detailPhotoListHelper : HorizontalCollectionViewHelper?
+    
+    init() {
+        let urlRequestBuilder = URLRequestBuilder()
+        loader = PhotosPaginationLoader(PhotosRequestManager(with: urlRequestBuilder))
+    }
     
     func start(from navigationController: UINavigationController) {
         
