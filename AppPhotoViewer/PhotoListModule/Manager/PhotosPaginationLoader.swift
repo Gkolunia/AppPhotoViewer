@@ -18,17 +18,17 @@ class PhotosPaginationLoader : PhotosLoader {
     weak var delegate : PhotosListShowing?
     let photoRequestManager : PhotosRequestManagerProtocol
     
-    var currentPage : Int = 1
-    var isLoading : Bool = false
+    private(set) var currentPage : Int = 1
+    private(set) var isLoading : Bool = false
     
     init(_ requestManager: PhotosRequestManagerProtocol) {
         photoRequestManager = requestManager
     }
     
     func initialLoadPhotos() {
-        photoRequestManager.getLatestPhotos(currentPage, 100) { (success, response, error) in
+        photoRequestManager.getLatestPhotos(currentPage, 100) {[weak self] (success, response, error) in
             if let response = response {
-                self.delegate?.photosLoaded(response.results)
+                self?.delegate?.photosLoaded(response.results)
             }
         }
     }
@@ -36,7 +36,11 @@ class PhotosPaginationLoader : PhotosLoader {
     func loadMore() {
         if !isLoading {
             isLoading = true
-            photoRequestManager.getLatestPhotos(currentPage+1, 30) { (success, response, error) in
+            photoRequestManager.getLatestPhotos(currentPage+1, 30) {[weak self] (success, response, error) in
+                guard let `self` = self else {
+                    return
+                }
+
                 if let response = response {
                     self.delegate?.photosLoaded(response.results)
                 }
