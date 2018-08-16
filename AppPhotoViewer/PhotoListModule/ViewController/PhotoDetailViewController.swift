@@ -8,10 +8,14 @@
 
 import UIKit
 
+/// Delegation dissmissing
 protocol PhotoDetailViewControllerDelegate : class {
+    
+    /// Passed all items which was downloaded by list controller.
     func doDissmiss(with allItems: [PhotoItemViewModel])
 }
 
+/// Controller setups views to show large image and small previews.
 class PhotoDetailViewController : UIViewController {
     
     let imageView : UIImageView = UIImageView(frame: CGRect())
