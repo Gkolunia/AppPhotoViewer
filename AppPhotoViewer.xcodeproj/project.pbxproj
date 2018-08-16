@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5DF6B87521240E5B0020A823 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF6B87421240E5B0020A823 /* Nuke.framework */; };
-		5DF6B87621240E650020A823 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF6B87421240E5B0020A823 /* Nuke.framework */; };
-		5DF6B87721240E650020A823 /* Nuke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF6B87421240E5B0020A823 /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A31713022124EA7E006A8869 /* PhotosImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31713012124EA7E006A8869 /* PhotosImageLoadManager.swift */; };
 		A3214B9D2124FADC00B9A647 /* APIRequestManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3214B9C2124FADC00B9A647 /* APIRequestManagerTests.swift */; };
 		A3214B9F2125025800B9A647 /* PhotoItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3214B9E2125025800B9A647 /* PhotoItemViewModelTests.swift */; };
@@ -18,6 +15,9 @@
 		A3214BA521250F8600B9A647 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3214BA421250F8600B9A647 /* Mocks.swift */; };
 		A3214BA72125104B00B9A647 /* PhotosPaginationLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3214BA62125104B00B9A647 /* PhotosPaginationLoaderTests.swift */; };
 		A3214BA92125155200B9A647 /* PhotosCollectionViewHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3214BA82125155200B9A647 /* PhotosCollectionViewHelperTests.swift */; };
+		A3214BAB212517D300B9A647 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3214BAA212517D300B9A647 /* Nuke.framework */; };
+		A3214BAC212517DB00B9A647 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3214BAA212517D300B9A647 /* Nuke.framework */; };
+		A3214BAD212517DB00B9A647 /* Nuke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3214BAA212517D300B9A647 /* Nuke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A33CCE532123548C0016E809 /* VerticalCollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33CCE522123548C0016E809 /* VerticalCollectionViewHelper.swift */; };
 		A33CCE55212354970016E809 /* HorizontalCollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33CCE54212354970016E809 /* HorizontalCollectionViewHelper.swift */; };
 		A33CCE572123807F0016E809 /* URLRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33CCE562123807F0016E809 /* URLRequestBuilderTests.swift */; };
@@ -68,7 +68,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5DF6B87721240E650020A823 /* Nuke.framework in Embed Frameworks */,
+				A3214BAD212517DB00B9A647 /* Nuke.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,7 +76,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5DF6B87421240E5B0020A823 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = SOURCE_ROOT; };
 		A31713012124EA7E006A8869 /* PhotosImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosImageLoadManager.swift; sourceTree = "<group>"; };
 		A3214B9C2124FADC00B9A647 /* APIRequestManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestManagerTests.swift; sourceTree = "<group>"; };
 		A3214B9E2125025800B9A647 /* PhotoItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItemViewModelTests.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		A3214BA421250F8600B9A647 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		A3214BA62125104B00B9A647 /* PhotosPaginationLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPaginationLoaderTests.swift; sourceTree = "<group>"; };
 		A3214BA82125155200B9A647 /* PhotosCollectionViewHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewHelperTests.swift; sourceTree = "<group>"; };
+		A3214BAA212517D300B9A647 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nuke.framework; sourceTree = "<group>"; };
 		A33CCE522123548C0016E809 /* VerticalCollectionViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCollectionViewHelper.swift; sourceTree = "<group>"; };
 		A33CCE54212354970016E809 /* HorizontalCollectionViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewHelper.swift; sourceTree = "<group>"; };
 		A33CCE562123807F0016E809 /* URLRequestBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderTests.swift; sourceTree = "<group>"; };
@@ -122,8 +122,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DF6B87521240E5B0020A823 /* Nuke.framework in Frameworks */,
-				5DF6B87621240E650020A823 /* Nuke.framework in Frameworks */,
+				A3214BAB212517D300B9A647 /* Nuke.framework in Frameworks */,
+				A3214BAC212517DB00B9A647 /* Nuke.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,7 +185,7 @@
 		A35570F0211EF91B00CF52F0 /* AppPhotoViewer */ = {
 			isa = PBXGroup;
 			children = (
-				5DF6B87421240E5B0020A823 /* Nuke.framework */,
+				A3214BAA212517D300B9A647 /* Nuke.framework */,
 				A35571302120149200CF52F0 /* PhotoListModule */,
 				A3557128212013DD00CF52F0 /* APIRequestManager */,
 				A31713032124EDE3006A8869 /* Utils */,
@@ -653,6 +653,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/AppPhotoViewer",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AppPhotoViewer/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -675,6 +676,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/AppPhotoViewer",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AppPhotoViewer/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
