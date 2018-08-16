@@ -10,7 +10,7 @@ import UIKit
 
 class HorizontalCollectionViewLayout : UICollectionViewLayout {
     
-    fileprivate var cellPadding : CGFloat = 3
+    fileprivate var cellPadding : CGFloat = 0.5
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
     fileprivate var contentWidth : CGFloat = 0
     
