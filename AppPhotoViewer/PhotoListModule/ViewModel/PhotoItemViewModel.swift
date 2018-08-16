@@ -9,6 +9,7 @@
 import Foundation
 import CoreGraphics
 
+/// View model contains data is needed to setup collection view cells.
 struct PhotoItemViewModel : Equatable {
 
     let smallImageUrl : URL
@@ -18,6 +19,9 @@ struct PhotoItemViewModel : Equatable {
     let tagTitle : String
     let id: String
     
+    /// Init for creating view models from photo model.
+    ///
+    /// - Parameter model: photo model is model which is created after parsing json.
     init(from model: PhotoItemModel) {
         smallImageUrl = model.urls.small
         largeImageUrl = model.urls.full

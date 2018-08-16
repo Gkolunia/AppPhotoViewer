@@ -8,10 +8,14 @@
 
 import UIKit
 
+/// Coordinator incapsulates logic of navigation beetwen controllers.
+/// Also creates all needed objects for the Controllers, but the logic would be better to move in some factories.
 class PhotoListCoordinator : CoordinatorProtocol {
     
     var rootNavigationController : UINavigationController?
+    // Loader of images. It is shared instance among controllers in the coordinator.
     private let loader : PhotosPaginationLoader
+    // Main list controller to update it's state when we back from detail controller.
     private weak var mainListController : PhotoListViewController?
     
     init() {
@@ -68,7 +72,9 @@ class PhotoListCoordinator : CoordinatorProtocol {
 extension PhotoListCoordinator : PhotoDetailViewControllerDelegate {
     
     func doDissmiss(with allItems: [PhotoItemViewModel]) {
-        loader.delegate = mainListController!
+        // Loader should have previous delegate to send updates about new elements to main list.
+        loader.delegate = mainListController
+        // Update data source on main screen.
         mainListController?.collectionViewHelper.setNewDataSource(allItems)
     }
     
