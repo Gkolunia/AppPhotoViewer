@@ -9,17 +9,20 @@
 import XCTest
 @testable import AppPhotoViewer
 
+struct TestStubsPhotoModel {
+    static let photoModel1 = PhotoItemModel(id: "id", urls: PhotoUrls(full: URL(fileURLWithPath: "http://url.com"), small: URL(fileURLWithPath: "http://url.com")),
+                                     likes: 2, width: 20, height: 30, tags: [Tag(title: "First tag"), Tag(title: "SecondTag")])
+    
+    static let photoModel2 = PhotoItemModel(id: "id2", urls: PhotoUrls(full: URL(fileURLWithPath: "http://url.com"), small: URL(fileURLWithPath: "http://url.com")),
+                                     likes: 2, width: 220, height: 150, tags: [Tag(title: "First tag"), Tag(title: "SecondTag")])
+}
+
+
 class PhotoItemViewModelTests: XCTestCase {
-    
-    let photoModel1 = PhotoItemModel(id: "id", urls: PhotoUrls(full: URL(fileURLWithPath: "http://url.com"), small: URL(fileURLWithPath: "http://url.com")),
-                                    likes: 2, width: 20, height: 30, tags: [Tag(title: "First tag"), Tag(title: "SecondTag")])
-    
-    let photoModel2 = PhotoItemModel(id: "id2", urls: PhotoUrls(full: URL(fileURLWithPath: "http://url.com"), small: URL(fileURLWithPath: "http://url.com")),
-                                     likes: 2, width: 22, height: 32, tags: [Tag(title: "First tag"), Tag(title: "SecondTag")])
-    
+
     func testCreateViewModel() {
 
-        let viewModel = PhotoItemViewModel(from: photoModel1)
+        let viewModel = PhotoItemViewModel(from: TestStubsPhotoModel.photoModel1)
         
         XCTAssertTrue(viewModel.size.equalTo(CGSize(width: 20, height: 30)), "Wrong size")
         XCTAssertTrue(viewModel.tagTitle == "First tag", "Wrong tag")
@@ -28,8 +31,8 @@ class PhotoItemViewModelTests: XCTestCase {
     
     func testEqualObjects() {
         
-        let viewModel1 = PhotoItemViewModel(from: photoModel1)
-        let viewModel2 = PhotoItemViewModel(from: photoModel1)
+        let viewModel1 = PhotoItemViewModel(from: TestStubsPhotoModel.photoModel1)
+        let viewModel2 = PhotoItemViewModel(from: TestStubsPhotoModel.photoModel1)
         
         XCTAssertTrue(viewModel1 == viewModel2, "Wrong implementation of Equatable")
         
@@ -37,8 +40,8 @@ class PhotoItemViewModelTests: XCTestCase {
     
     func testUnequalObjects() {
         
-        let viewModel1 = PhotoItemViewModel(from: photoModel1)
-        let viewModel2 = PhotoItemViewModel(from: photoModel2)
+        let viewModel1 = PhotoItemViewModel(from: TestStubsPhotoModel.photoModel1)
+        let viewModel2 = PhotoItemViewModel(from: TestStubsPhotoModel.photoModel2)
         
         XCTAssertTrue(viewModel1 != viewModel2, "Wrong implementation of Equatable")
         
