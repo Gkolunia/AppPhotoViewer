@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Models which is creates from json.
+
 struct PhotoUrls : Codable {
     let full : URL
     let small : URL

@@ -16,8 +16,11 @@ fileprivate struct NetworkDomainErrors {
     static let somethingGoesWrong : ErrorMessage = ("Something goes wrong.", nil)
 }
 
+
+/// The manager incapsulates logic of making and executing new requests and handling their responses.
 class APIRequestManager {
 
+    /// Builder of new requests
     let builder: URLRequestBuilderProtocol
     let session: URLSession
     
@@ -43,6 +46,7 @@ class APIRequestManager {
         }
     }
     
+    /// Logic of handling responses. Wraps CompletionHandler into URLSession closures.
     private func responseHandler<T: Codable>(with handler:@escaping CompletionHandler<T>) -> (Data?, URLResponse?, Error?) -> Swift.Void {
         
         return { (data, response, error) in

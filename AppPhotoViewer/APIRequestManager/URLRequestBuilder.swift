@@ -13,11 +13,13 @@ enum RequestType: String {
     case post = "POST"
 }
 
+/// Constants for configuration APIConstants structure for Unsplash server.
 fileprivate let unsplash = "api.unsplash.com"
 fileprivate let unsplashScheme = "https"
 fileprivate let unsplasHeaderFields : [String : String] = ["AcceptVersion" : "v1",
                                                            "Authorization" : "Client-ID c1717fdbec79a4749bc691e090050acdfbea76fcd9d29c1fa9a5e8bacb83df46"]
 
+/// Confing for builder needs.
 struct APIConstants {
     let host : String
     let scheme : String
@@ -30,6 +32,8 @@ struct APIConstants {
     }
 }
 
+
+/// Abstract interface of url requests builder. Provides simple api to create new requests.
 protocol URLRequestBuilderProtocol {
     func build() -> URLRequest?
     func setPath(_ path: String) -> Self
