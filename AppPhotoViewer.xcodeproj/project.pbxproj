@@ -656,7 +656,6 @@
 				DEVELOPMENT_TEAM = QK893C648G;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/AppPhotoViewer",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AppPhotoViewer/Resources/Info.plist";
@@ -679,7 +678,6 @@
 				DEVELOPMENT_TEAM = QK893C648G;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/AppPhotoViewer",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AppPhotoViewer/Resources/Info.plist";
