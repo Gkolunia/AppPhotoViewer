@@ -8,20 +8,22 @@
 
 import UIKit
 
+/// Abstraction of delegate which can return size of content of image, is used to define which orientation of the cell should be used - portrait or landscape.
 protocol VerticalCollectionViewLayoutDelegate : class {
     func collectionView(_ collectionView: UICollectionView, sizeFor indexPath: IndexPath) -> CGSize
 }
 
+/// Layout vertically represent cells and depends on size of image used different orientation of a cell.
 class VerticalCollectionViewLayout : UICollectionViewLayout {
     
     weak var delegate: VerticalCollectionViewLayoutDelegate?
     
-    fileprivate var numberOfColumns = 2
-    fileprivate var cellPadding : CGFloat = 6
-    fileprivate var cache = [UICollectionViewLayoutAttributes]()
-    fileprivate var contentHeight : CGFloat = 0
+    private var numberOfColumns = 2
+    private var cellPadding : CGFloat = 6
+    private var cache = [UICollectionViewLayoutAttributes]()
+    private var contentHeight : CGFloat = 0
     
-    fileprivate var contentWidth : CGFloat {
+    private var contentWidth : CGFloat {
         guard let collectionView = collectionView else {
             return 0
         }
