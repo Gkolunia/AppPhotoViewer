@@ -8,15 +8,26 @@
 
 import UIKit
 
+/// Abstraction of photos loader is needed to load more photos when collection view is scrolled to the end of the list.
 protocol PhotosLoader {
     func loadMore()
 }
 
+/// Abstraction of collection view updater, provides interface to update data source for collection view.
 protocol PhotosCollectionViewUpdater : UICollectionViewDelegate, UICollectionViewDataSource {
-    func append(_ newElements: [PhotoItemModel])
-    func collectionViewCellType() -> (cellClass: AnyClass, cellId: String)
+    
     var collectionView : UICollectionView? { get set }
+    
+    /// Append new items to existing data source and also updates collection view.
+    ///
+    /// - Parameter newElements: only new elements
+    func append(_ newElements: [PhotoItemModel])
+    
+    /// Method which register cells for current colletion view
+    func registerCells()
     func allItems() -> [PhotoItemViewModel]
+    
+    /// Set completely mew dta source and reloads collection view.
     func setNewDataSource(_ newDataSource:[PhotoItemViewModel])
 }
 
@@ -31,6 +42,7 @@ class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDele
         self.collectionViewHelper = collectionViewHelper
         self.collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
         collectionViewHelper.collectionView = collectionView
+        collectionViewHelper.registerCells()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,7 +57,6 @@ class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDele
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         collectionView.dataSource = collectionViewHelper
         collectionView.delegate = collectionViewHelper
-        collectionView.register(collectionViewHelper.collectionViewCellType().cellClass, forCellWithReuseIdentifier: collectionViewHelper.collectionViewCellType().cellId)
         collectionView.backgroundView?.backgroundColor = .white
         collectionView.backgroundColor = .white
         collectionView.showsVerticalScrollIndicator = false

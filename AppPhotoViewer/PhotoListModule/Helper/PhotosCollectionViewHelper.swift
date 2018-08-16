@@ -77,10 +77,6 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
         self.collectionView?.insertItems(at: indexPath)
     }
     
-    func collectionViewCellType() -> (cellClass: AnyClass, cellId: String) {
-        return (CellType.self, CellType.reuseId())
-    }
-    
     func allItems() -> [PhotoItemViewModel] {
         return dataSource
     }
@@ -88,6 +84,10 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
     func setNewDataSource(_ newDataSource: [PhotoItemViewModel]) {
         dataSource = newDataSource
         collectionView?.reloadData()
+    }
+    
+    func registerCells() {
+        collectionView?.register(CellType.self, forCellWithReuseIdentifier: CellType.reuseId())
     }
 
 }
