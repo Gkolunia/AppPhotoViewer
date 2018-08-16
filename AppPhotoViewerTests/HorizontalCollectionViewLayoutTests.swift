@@ -11,18 +11,6 @@ import XCTest
 
 class HorizontalCollectionViewLayoutTests : XCTestCase {
     
-//    class TestCollectionViewDataSource: NSObject, UICollectionViewDataSource {
-//
-//        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//            return 2
-//        }
-//
-//        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//            return UICollectionViewCell(frame: CGRect())
-//        }
-//
-//    }
-    
     class TestUICollectionView: UICollectionView {
         
         override func numberOfItems(inSection section: Int) -> Int {

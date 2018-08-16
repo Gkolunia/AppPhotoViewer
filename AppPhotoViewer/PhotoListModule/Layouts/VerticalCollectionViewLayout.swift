@@ -9,7 +9,7 @@
 import UIKit
 
 protocol VerticalCollectionViewLayoutDelegate : class {
-    func collectionView(_ collectionView: UICollectionView, sizeForPhotoAtIndexPath: IndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, sizeFor indexPath: IndexPath) -> CGSize
 }
 
 class VerticalCollectionViewLayout : UICollectionViewLayout {
@@ -55,7 +55,7 @@ class VerticalCollectionViewLayout : UICollectionViewLayout {
         for item in 0..<collectionView.numberOfItems(inSection: 0) {
             
             let indexPath = IndexPath(item: item, section: 0)
-            let sizePhoto = delegate.collectionView(collectionView, sizeForPhotoAtIndexPath: indexPath)
+            let sizePhoto = delegate.collectionView(collectionView, sizeFor: indexPath)
             
             var heightCell = cellPadding*2 + columnWidth
             if sizePhoto.height*1.3 > sizePhoto.width {

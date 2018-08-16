@@ -10,8 +10,8 @@ import UIKit
 
 class VerticalCollectionViewHelper : PhotosCollectionViewHelper<PhotoItemCollectionViewCell>, VerticalCollectionViewLayoutDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, sizeForPhotoAtIndexPath: IndexPath) -> CGSize {
-        let item = dataSource[sizeForPhotoAtIndexPath.item]
+    func collectionView(_ collectionView: UICollectionView, sizeFor indexPath: IndexPath) -> CGSize {
+        let item = dataSource[indexPath.item]
         return item.size
     }
     
