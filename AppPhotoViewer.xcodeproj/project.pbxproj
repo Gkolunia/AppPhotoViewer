@@ -187,8 +187,8 @@
 		A3557105211EF91D00CF52F0 /* AppPhotoViewerTests */ = {
 			isa = PBXGroup;
 			children = (
-				A3557106211EF91D00CF52F0 /* AppPhotoViewerTests.swift */,
 				A3557108211EF91D00CF52F0 /* Info.plist */,
+				A3557106211EF91D00CF52F0 /* AppPhotoViewerTests.swift */,
 				A33CCE562123807F0016E809 /* URLRequestBuilderTests.swift */,
 				A3214B9C2124FADC00B9A647 /* APIRequestManagerTests.swift */,
 			);
