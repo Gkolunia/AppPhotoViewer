@@ -11,18 +11,10 @@ import XCTest
 
 class HorizontalCollectionViewLayoutTests : XCTestCase {
     
-    class TestUICollectionView: UICollectionView {
-        
-        override func numberOfItems(inSection section: Int) -> Int {
-            return 2
-        }
-        
-    }
-    
     func testLayoutAttributes() {
         
         let layout = HorizontalCollectionViewLayout()
-        let collectionView = TestUICollectionView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), collectionViewLayout: layout)
+        let collectionView = TestUICollectionViewMock(frame: CGRect(x: 0, y: 0, width: 100, height: 100), collectionViewLayout: layout)
         layout.prepare()
         
         let attributesFirstRow = layout.layoutAttributesForItem(at: IndexPath(row: 0, section: 0))

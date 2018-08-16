@@ -11,28 +11,12 @@ import XCTest
 
 class VerticalCollectionViewLayoutTests: XCTestCase {
     
-    class TestVerticalCollectionViewLayoutDelegate : VerticalCollectionViewLayoutDelegate {
-        
-        func collectionView(_ collectionView: UICollectionView, sizeFor indexPath: IndexPath) -> CGSize {
-            let sizes = [CGSize(width: 300, height: 300), CGSize(width: 300, height: 900)]
-            return sizes[indexPath.row]
-        }
-    }
-    
-    class TestUICollectionView: UICollectionView {
-        
-        override func numberOfItems(inSection section: Int) -> Int {
-            return 2
-        }
-        
-    }
-    
     func testLayoutAttributes() {
         
         let layout = VerticalCollectionViewLayout()
-        let layoutDelegate = TestVerticalCollectionViewLayoutDelegate()
+        let layoutDelegate = TestVerticalCollectionViewLayoutDelegateMock()
         layout.delegate = layoutDelegate
-        let collectionView = TestUICollectionView(frame: CGRect(x: 0, y: 0, width: 150, height: 400), collectionViewLayout: layout)
+        let collectionView = TestUICollectionViewMock(frame: CGRect(x: 0, y: 0, width: 150, height: 400), collectionViewLayout: layout)
         layout.prepare()
         
         let attributesFirstRow = layout.layoutAttributesForItem(at: IndexPath(row: 0, section: 0))
