@@ -11,31 +11,9 @@ import XCTest
 
 class APIRequestManagerTests: XCTestCase {
     
-    struct ReturnedModelStub : Codable {
-        
-    }
-    
-    class URLSessionDataTaskStub : URLSessionDataTask {
-        
-        override func resume() {
-            
-        }
-        
-    }
-    
     func testFailureDoRequest() {
         
-        struct TestStruct : Codable {
-            
-        }
-        
-        class URLSessionMock : URLSession {
-            override func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-                completionHandler(nil, nil, nil)
-                let dataTask = URLSessionDataTaskStub()
-                return dataTask
-            }
-        }
+        struct TestStruct : Codable { }
         
         let apiManager = APIRequestManager(with: URLRequestBuilder(with: APIConstants(host, scheme, httpHeaderFields)), urlSession: URLSessionMock())
         apiManager.makeAndDoRequest("", nil, RequestType.get) { (success, response : TestStruct?, error) in

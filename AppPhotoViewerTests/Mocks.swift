@@ -48,3 +48,15 @@ class TestUICollectionViewFlowLayoutMock: UICollectionViewFlowLayout {
     }
     
 }
+
+class URLSessionDataTaskStub : URLSessionDataTask {
+    override func resume() { }
+}
+
+class URLSessionMock : URLSession {
+    override func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        completionHandler(nil, nil, nil)
+        let dataTask = URLSessionDataTaskStub()
+        return dataTask
+    }
+}
