@@ -41,18 +41,6 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
         self.dataSource = dataSource
     }
     
-    /// Find index path for particular item. Returns nil if item doesnot exist in dataSource.
-    func indexPath(for item: PhotoItemViewModel) -> IndexPath? {
-        
-        let index = dataSource.index(where: { $0 == item })
-        
-        if let index = index {
-            return IndexPath(row: index, section: 0)
-        }
-        
-        return nil
-    }
-    
     //MARK: UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count

@@ -54,9 +54,9 @@ class PhotoListCoordinator : CoordinatorProtocol {
         
         let layout = HorizontalCollectionViewLayout()
         let collectionViewHelper = HorizontalCollectionViewHelper(with: items)
-        collectionViewHelper.didScrollToItem = { item in
+        collectionViewHelper.didScrollToItem = { indexPath, item in
             detailPhotoController.viewModel = item
-            detailPhotoController.currentIndexPath = collectionViewHelper.indexPath(for: item)
+            detailPhotoController.currentIndexPath = indexPath
         }
         
         let photoListController = PhotoListViewController(loader, collectionViewHelper, layout)

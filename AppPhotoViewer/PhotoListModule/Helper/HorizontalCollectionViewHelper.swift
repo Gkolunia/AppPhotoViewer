@@ -10,7 +10,7 @@ import UIKit
 
 class HorizontalCollectionViewHelper: PhotosCollectionViewHelper<SmallPhotoItemCollectionViewCell> {
     
-    var didScrollToItem : ((PhotoItemViewModel) -> ())?
+    var didScrollToItem : ((IndexPath, PhotoItemViewModel) -> ())?
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x + scrollView.frame.width > scrollView.contentSize.width*0.9 {
@@ -28,7 +28,7 @@ class HorizontalCollectionViewHelper: PhotosCollectionViewHelper<SmallPhotoItemC
                 return
             }
             
-            didScrollToItem?(dataSource[index.row])
+            didScrollToItem?(index, dataSource[index.row])
         }
         
     }
