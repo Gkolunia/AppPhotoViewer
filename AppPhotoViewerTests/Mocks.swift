@@ -11,8 +11,14 @@ import UIKit
 
 class TestUICollectionViewMock: UICollectionView {
     
+    var insertedIndexPath : [IndexPath]?
+    
     override func numberOfItems(inSection section: Int) -> Int {
         return 2
+    }
+    
+    override func insertItems(at indexPaths: [IndexPath]) {
+        insertedIndexPath = indexPaths
     }
     
 }
@@ -29,6 +35,16 @@ class TestPhotosRequestManagerMock : PhotosRequestManagerProtocol {
     
     func getLatestPhotos(_ pageNumber: Int, _ countPerPage: Int, handler: @escaping (Bool, PhotosContainer?, ErrorMessage?) -> ()) {
         handler(true, nil, nil)
+    }
+    
+}
+
+class TestUICollectionViewFlowLayoutMock: UICollectionViewFlowLayout {
+    
+    var prepareIsCalled = false
+    
+    override func prepare() {
+        prepareIsCalled = true
     }
     
 }
