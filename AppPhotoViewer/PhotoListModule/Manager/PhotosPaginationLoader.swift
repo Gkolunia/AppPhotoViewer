@@ -9,10 +9,15 @@
 import Foundation
 import UIKit
 
+/// Abstraction of object which can show and handle new elements.
 protocol PhotosListShowing : class {
+    
+    /// Pass only new items which is loaded for current page
     func photosLoaded(_ newElements: [PhotoItemModel])
 }
 
+
+/// The loader incapsulates logic of pagination state. Provides simple interface to get more objects.
 class PhotosPaginationLoader : PhotosLoader {
     
     weak var delegate : PhotosListShowing?
