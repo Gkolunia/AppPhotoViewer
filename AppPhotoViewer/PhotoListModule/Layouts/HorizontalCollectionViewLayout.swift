@@ -8,13 +8,14 @@
 
 import UIKit
 
+/// Layout for representing data horizontaly in collection view.
 class HorizontalCollectionViewLayout : UICollectionViewLayout {
     
-    fileprivate var cellPadding : CGFloat = 0.5
-    fileprivate var cache = [UICollectionViewLayoutAttributes]()
-    fileprivate var contentWidth : CGFloat = 0
+    private var cellPadding : CGFloat = 0.5
+    private var cache = [UICollectionViewLayoutAttributes]()
+    private var contentWidth : CGFloat = 0
     
-    fileprivate var contentHeight : CGFloat {
+    private var contentHeight : CGFloat {
         guard let collectionView = collectionView else {
             return 0
         }
@@ -36,6 +37,7 @@ class HorizontalCollectionViewLayout : UICollectionViewLayout {
 
         let widthCell = cellPadding*2 + collectionView.frame.size.height/2
         let heightCell = collectionView.frame.size.height
+        // Starts all items shows with offset.
         var xOffset : CGFloat = collectionView.frame.size.width/2
         
         
@@ -55,6 +57,7 @@ class HorizontalCollectionViewLayout : UICollectionViewLayout {
 
         }
         
+        // Make offset at the end of the list.
         contentWidth = contentWidth+collectionView.bounds.width/2
         
     }
