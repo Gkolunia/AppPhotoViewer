@@ -8,12 +8,17 @@
 
 import UIKit
 
+/// Abstraction of observer which is knows when new items should be loaded.
 protocol PhotosCollectionViewEventsDelegate : class {
     func needsLoadMoreItems()
 }
 
+/// Abstraction of cell for PhotoItemViewModel
 protocol PhotoCellProtocol : class {
+    
     func setup(with item: PhotoItemViewModel)
+    
+    /// Reuse id is needed to registering cells in collection view.
     static func reuseId() -> String
 }
 
@@ -23,6 +28,7 @@ extension PhotoCellProtocol {
     }
 }
 
+/// Collection view helper provides datsource and delegate for collection view.
 class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, PhotosCollectionViewUpdater {
 
     weak var collectionView : UICollectionView?
@@ -35,6 +41,19 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
         self.dataSource = dataSource
     }
     
+    /// Find index path for particular item. Returns nil if item doesnot exist in dataSource.
+    func indexPath(for item: PhotoItemViewModel) -> IndexPath? {
+        
+        let index = dataSource.index(where: { $0 == item })
+        
+        if let index = index {
+            return IndexPath(row: index, section: 0)
+        }
+        
+        return nil
+    }
+    
+    //MARK: UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -48,23 +67,13 @@ class PhotosCollectionViewHelper<CellType: PhotoCellProtocol>: NSObject, UIColle
         return cell
     }
     
+    //Mark: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         didSelectHandler?(indexPath, dataSource)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // For purpose to override in inherited classes.
-    }
-    
-    func indexPath(for item: PhotoItemViewModel) -> IndexPath? {
-        
-        let index = dataSource.index(where: { $0 == item })
-        
-        if let index = index {
-            return IndexPath(row: index, section: 0)
-        }
-        
-        return nil
     }
     
     //MARK: PhotosCollectionViewUpdater
