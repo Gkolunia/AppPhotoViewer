@@ -17,7 +17,7 @@ class VerticalCollectionViewLayoutTests: XCTestCase {
         let layoutDelegate = TestVerticalCollectionViewLayoutDelegateMock()
         layout.delegate = layoutDelegate
         let collectionView = TestUICollectionViewMock(frame: CGRect(x: 0, y: 0, width: 150, height: 400), collectionViewLayout: layout)
-        layout.prepare()
+        collectionView.collectionViewLayout.prepare()
         
         let attributesFirstRow = layout.layoutAttributesForItem(at: IndexPath(row: 0, section: 0))
         let attributesSecondRow = layout.layoutAttributesForItem(at: IndexPath(row: 1, section: 0))

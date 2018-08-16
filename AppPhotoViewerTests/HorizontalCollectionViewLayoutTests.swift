@@ -15,7 +15,7 @@ class HorizontalCollectionViewLayoutTests : XCTestCase {
         
         let layout = HorizontalCollectionViewLayout()
         let collectionView = TestUICollectionViewMock(frame: CGRect(x: 0, y: 0, width: 100, height: 100), collectionViewLayout: layout)
-        layout.prepare()
+        collectionView.collectionViewLayout.prepare()
         
         let attributesFirstRow = layout.layoutAttributesForItem(at: IndexPath(row: 0, section: 0))
         let attributesSecondRow = layout.layoutAttributesForItem(at: IndexPath(row: 1, section: 0))
