@@ -24,3 +24,11 @@ class TestVerticalCollectionViewLayoutDelegateMock : VerticalCollectionViewLayou
         return sizes[indexPath.row]
     }
 }
+
+class TestPhotosRequestManagerMock : PhotosRequestManagerProtocol {
+    
+    func getLatestPhotos(_ pageNumber: Int, _ countPerPage: Int, handler: @escaping (Bool, PhotosContainer?, ErrorMessage?) -> ()) {
+        handler(true, nil, nil)
+    }
+    
+}
