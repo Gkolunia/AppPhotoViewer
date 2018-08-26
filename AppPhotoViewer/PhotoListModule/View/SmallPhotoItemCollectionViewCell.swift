@@ -10,7 +10,7 @@ import UIKit
 import Nuke
 
 /// The cell class is used to show images in horizontal collection view.
-class SmallPhotoItemCollectionViewCell : UICollectionViewCell, PhotoCellProtocol {
+class SmallPhotoItemCollectionViewCell : UICollectionViewCell {
 
     let imageView : UIImageView = UIImageView(frame: CGRect())
     

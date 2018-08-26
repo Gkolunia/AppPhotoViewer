@@ -16,7 +16,7 @@ class PhotoListCoordinator : CoordinatorProtocol {
     // Loader of images. It is shared instance among controllers in the coordinator.
     private let loader : PhotosPaginationLoader
     // Main list controller to update it's state when we back from detail controller.
-    private weak var mainListController : PhotoListViewController?
+//    private weak var mainListController : PhotoListViewController<PhotosCollectionViewHelper>?
     
     init() {
         let urlRequestBuilder = URLRequestBuilder()
@@ -26,56 +26,56 @@ class PhotoListCoordinator : CoordinatorProtocol {
     func start(from navigationController: UINavigationController) {
         rootNavigationController = navigationController
     
-        let mainPhotosListHelper = VerticalCollectionViewHelper()
-        mainPhotosListHelper.didSelectHandler = {[weak self] indexPath, items in
-            self?.doSelecting(indexPath, items)
-        }
-    
-        let layout = VerticalCollectionViewLayout()
-        layout.delegate = mainPhotosListHelper
-        
-        let controller = PhotoListViewController(loader, mainPhotosListHelper, layout)
-        
-        loader.delegate = controller
-        mainPhotosListHelper.delegate = controller
-        
-        navigationController.show(controller, sender: nil)
-        
-        loader.initialLoadPhotos()
-        
-        mainListController = controller
+//        let mainPhotosListHelper = VerticalCollectionViewHelper()
+//        mainPhotosListHelper.didSelectHandler = {[weak self] indexPath, items in
+//            self?.doSelecting(indexPath, items)
+//        }
+//
+//        let layout = VerticalCollectionViewLayout()
+//        layout.delegate = mainPhotosListHelper
+//
+//        let controller = PhotoListViewController(loader, mainPhotosListHelper, layout)
+//
+//        loader.delegate = controller
+//        mainPhotosListHelper.delegate = controller
+//
+//        navigationController.show(controller, sender: nil)
+//
+//        loader.initialLoadPhotos()
+//
+//        mainListController = controller
     }
     
     func doSelecting(_ indexPath: IndexPath,_ items: [PhotoItemViewModel]) {
-        let detailPhotoController  = PhotoDetailViewController(nibName: nil, bundle: nil)
-        detailPhotoController.delegate = self
-        detailPhotoController.currentIndexPath = indexPath
-        detailPhotoController.viewModel = items[indexPath.row]
-        
-        let layout = HorizontalCollectionViewLayout()
-        let collectionViewHelper = HorizontalCollectionViewHelper(with: items)
-        collectionViewHelper.didScrollToItem = { indexPath, item in
-            detailPhotoController.viewModel = item
-            detailPhotoController.currentIndexPath = indexPath
-        }
-        
-        let photoListController = PhotoListViewController(loader, collectionViewHelper, layout)
-        loader.delegate = photoListController
-        collectionViewHelper.delegate = photoListController
-        
-        detailPhotoController.setupChildPhotosController(photoListController)
-        
-        rootNavigationController?.show(detailPhotoController, sender: nil)
+//        let detailPhotoController  = PhotoDetailViewController(nibName: nil, bundle: nil)
+//        detailPhotoController.delegate = self
+//        detailPhotoController.currentIndexPath = indexPath
+//        detailPhotoController.viewModel = items[indexPath.row]
+//
+//        let layout = HorizontalCollectionViewLayout()
+//        let collectionViewHelper = HorizontalCollectionViewHelper(with: items)
+//        collectionViewHelper.didScrollToItem = { indexPath, item in
+//            detailPhotoController.viewModel = item
+//            detailPhotoController.currentIndexPath = indexPath
+//        }
+//
+//        let photoListController = PhotoListViewController(loader, collectionViewHelper, layout)
+//        loader.delegate = photoListController
+//        collectionViewHelper.delegate = photoListController
+//
+//        detailPhotoController.setupChildPhotosController(photoListController)
+//
+//        rootNavigationController?.show(detailPhotoController, sender: nil)
     }
 }
 
 extension PhotoListCoordinator : PhotoDetailViewControllerDelegate {
     
     func doDissmiss(with allItems: [PhotoItemViewModel]) {
-        // Loader should have previous delegate to send updates about new elements to main list.
-        loader.delegate = mainListController
-        // Update data source on main screen.
-        mainListController?.collectionViewHelper.setNewDataSource(allItems)
+//        // Loader should have previous delegate to send updates about new elements to main list.
+//        loader.delegate = mainListController
+//        // Update data source on main screen.
+//        mainListController?.collectionViewHelper.setNewDataSource(allItems)
     }
     
 }

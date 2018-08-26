@@ -8,41 +8,36 @@
 
 import UIKit
 
-/// Abstraction of photos loader is needed to load more photos when collection view is scrolled to the end of the list.
-protocol PhotosLoader {
-    func loadMore()
+protocol ListEventsHandling : EventsHandling {
+    func loadMore(in view: ViewPartialReloadingItems)
 }
 
 /// Abstraction of collection view updater, provides interface to update data source for collection view.
-protocol PhotosCollectionViewUpdater : UICollectionViewDelegate, UICollectionViewDataSource {
+protocol PhotosListDataProvider : ListDataProvider where Element == PhotoItemViewModel {
     
-    var collectionView : UICollectionView? { get set }
-    
-    /// Append new items to existing data source and also updates collection view.
-    ///
-    /// - Parameter newElements: only new elements
-    func append(_ newElements: [PhotoItemModel])
-    
-    /// Method which register cells for current colletion view
-    func registerCells()
-    func allItems() -> [PhotoItemViewModel]
-    
-    /// Set completely mew dta source and reloads collection view.
-    func setNewDataSource(_ newDataSource:[PhotoItemViewModel])
 }
 
-class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDelegate {
+/// Abstraction of cell for PhotoItemViewModel
+protocol PhotoCellProtocol : GenericReuseView {
+    func setup(with item: PhotoItemViewModel)
+}
 
-    let photosLoader : PhotosLoader
-    let collectionView : UICollectionView
-    let collectionViewHelper : PhotosCollectionViewUpdater
+class PhotoListViewController<DataProvider, EventsHandling, CellType> : UIViewController, ViewLoading, ViewDataReloading, ViewPartialReloadingItems, UICollectionViewDelegate, UICollectionViewDataSource
+        where
+            DataProvider: PhotosListDataProvider,
+            EventsHandling: ListEventsHandling,
+            CellType: UICollectionViewCell & PhotoCellProtocol {
     
-    init(_ loader: PhotosLoader, _ collectionViewHelper: PhotosCollectionViewUpdater, _ layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
-        self.photosLoader = loader
-        self.collectionViewHelper = collectionViewHelper
+    let collectionView: UICollectionView
+    let dataProvider: DataProvider
+    let eventsHandler: EventsHandling
+    
+    var isLoading: Bool = false
+    
+    init(_ eventsHandler: EventsHandling, _ dataProvider: DataProvider, _ layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
+        self.dataProvider = dataProvider
+        self.eventsHandler = eventsHandler
         self.collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
-        collectionViewHelper.collectionView = collectionView
-        collectionViewHelper.registerCells()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,29 +50,44 @@ class PhotoListViewController : UIViewController, PhotosCollectionViewEventsDele
         
         collectionView.frame = self.view.bounds
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        collectionView.dataSource = collectionViewHelper
-        collectionView.delegate = collectionViewHelper
+        collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.backgroundView?.backgroundColor = .white
         collectionView.backgroundColor = .white
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
-        
+        collectionView.register(CellType.self, forCellWithReuseIdentifier: CellType.reuseIdentifier())
         view.addSubview(collectionView)
-    }
-    
-    func needsLoadMoreItems() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        photosLoader.loadMore()
+        
+        eventsHandler.loadData(in: self)
         
     }
     
-}
-
-extension PhotoListViewController : PhotosListShowing {
-    
-    func photosLoaded(_ newElements: [PhotoItemModel]) {
-        collectionViewHelper.append(newElements)
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    func reloadData() {
+        collectionView.reloadData()
     }
+    
+    func insertNewItems(at indexPaths: [IndexPath]) {
+        collectionView.collectionViewLayout.prepare()
+        collectionView.insertItems(at: indexPaths)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataProvider.count()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell : CellType = collectionView.dequeueReusableCell(for: indexPath)
+        cell.setup(with: dataProvider.item(at: indexPath.row))
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let leftToTheEnd = dataProvider.count() - indexPath.row
+        if leftToTheEnd<10 {
+            eventsHandler.loadMore(in: self)
+        }
+    }
+    
     
 }
