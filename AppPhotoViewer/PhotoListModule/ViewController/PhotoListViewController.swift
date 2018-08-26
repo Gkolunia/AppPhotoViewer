@@ -59,7 +59,7 @@ class PhotoListViewController<DataProvider, EventsHandling, CellType> : UIViewCo
         collectionView.register(CellType.self, forCellWithReuseIdentifier: CellType.reuseIdentifier())
         view.addSubview(collectionView)
         
-        eventsHandler.loadData(in: self)
+        eventsHandler.loadDataIfNeeded(in: self)
         
     }
     
@@ -87,6 +87,14 @@ class PhotoListViewController<DataProvider, EventsHandling, CellType> : UIViewCo
         if leftToTheEnd<10 {
             eventsHandler.loadMore(in: self)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //
     }
     
     

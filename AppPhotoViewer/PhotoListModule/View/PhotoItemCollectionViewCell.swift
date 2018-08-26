@@ -10,7 +10,7 @@ import UIKit
 import Nuke
 
 /// Cell shows photo on verticall collection view.
-class PhotoItemCollectionViewCell : UICollectionViewCell {
+class PhotoItemCollectionViewCell : UICollectionViewCell, PhotoCellProtocol {
     
     let imageView : UIImageView = UIImageView(frame: CGRect())
     let likeImage : UIImageView = UIImageView(image: UIImage(named: "like"))

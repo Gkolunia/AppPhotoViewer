@@ -58,7 +58,7 @@ class HorizontalCollectionViewLayout : UICollectionViewLayout {
         }
         
         // Make offset at the end of the list.
-        contentWidth = contentWidth+collectionView.bounds.width/2
+//        contentWidth = contentWidth+collectionView.bounds.width/2
         
     }
     

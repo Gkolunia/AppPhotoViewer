@@ -8,20 +8,11 @@
 
 import UIKit
 
-/// Delegation dissmissing
-protocol PhotoDetailViewControllerDelegate : class {
-    
-    /// Passed all items which was downloaded by list controller.
-    func doDissmiss(with allItems: [PhotoItemViewModel])
-}
-
 /// Controller setups views to show large image and small previews.
 class PhotoDetailViewController : UIViewController {
     
     let imageView : UIImageView = UIImageView(frame: CGRect())
     let collectionViewContainer : UIView = UIView(frame: CGRect())
-//    weak var photoListController : PhotoListViewController?
-    weak var delegate : PhotoDetailViewControllerDelegate?
     
     var viewModel : PhotoItemViewModel? {
         didSet {
@@ -68,25 +59,19 @@ class PhotoDetailViewController : UIViewController {
 //        }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-//        delegate?.doDissmiss(with: photoListController!.collectionViewHelper.allItems())
+    func setupChildPhotosController(_ photoListController: UIViewController) {
+
+        self.addChildViewController(photoListController)
+        self.collectionViewContainer.addSubview(photoListController.view)
+
+        photoListController.view.translatesAutoresizingMaskIntoConstraints = false
+        photoListController.view.topAnchor.constraint(equalTo: self.collectionViewContainer.topAnchor).isActive = true
+        photoListController.view.bottomAnchor.constraint(equalTo: self.collectionViewContainer.bottomAnchor).isActive = true
+        photoListController.view.leadingAnchor.constraint(equalTo: self.collectionViewContainer.leadingAnchor).isActive = true
+        photoListController.view.trailingAnchor.constraint(equalTo: self.collectionViewContainer.trailingAnchor).isActive = true
+
+        photoListController.didMove(toParentViewController: self)
+
     }
-    
-//    func setupChildPhotosController(_ photoListController: PhotoListViewController) {
-//        self.photoListController = photoListController
-//
-//        self.addChildViewController(photoListController)
-//        self.collectionViewContainer.addSubview(photoListController.view)
-//
-//        photoListController.view.translatesAutoresizingMaskIntoConstraints = false
-//        photoListController.view.topAnchor.constraint(equalTo: self.collectionViewContainer.topAnchor).isActive = true
-//        photoListController.view.bottomAnchor.constraint(equalTo: self.collectionViewContainer.bottomAnchor).isActive = true
-//        photoListController.view.leadingAnchor.constraint(equalTo: self.collectionViewContainer.leadingAnchor).isActive = true
-//        photoListController.view.trailingAnchor.constraint(equalTo: self.collectionViewContainer.trailingAnchor).isActive = true
-//
-//        photoListController.didMove(toParentViewController: self)
-//
-//    }
     
 }

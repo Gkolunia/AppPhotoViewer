@@ -19,20 +19,23 @@ protocol ViewPartialReloadingItems: class {
     func insertNewItems(at indexPaths: [IndexPath])
 }
 
+protocol CoordinatorInput: class {
+    func doSelect(with item: PhotoItemViewModel)
+}
 
-class PhotosListPresenter: NSObject, PhotosListDataProvider, ListEventsHandling {
+class PhotosListPresenter: NSObject, PhotosListDataProvider, VerticalListEventsHandler {
 
     private var items:  [PhotoItemViewModel]
     private var photosDatasource: PhotosPaginationListDatasource
+    weak var input: CoordinatorInput?
     
     init(with items: [PhotoItemViewModel] = [PhotoItemViewModel](), _ photosDatasource: PhotosPaginationListDatasource) {
         self.items = items
         self.photosDatasource = photosDatasource
-        
     }
     
     func count() -> Int {
-        return 0
+        return items.count
     }
     
     func item(at index: Int) -> PhotoItemViewModel {
@@ -51,7 +54,10 @@ class PhotosListPresenter: NSObject, PhotosListDataProvider, ListEventsHandling 
         }
     }
     
-    func loadData(in view: ViewDataReloading & ViewLoading) {
+    func loadDataIfNeeded(in view: ViewDataReloading & ViewLoading) {
+        if !items.isEmpty {
+            return
+        }
         view.isLoading = true
         photosDatasource.initialLoadPhotos { (items) in
             if let items = items {
@@ -62,50 +68,8 @@ class PhotosListPresenter: NSObject, PhotosListDataProvider, ListEventsHandling 
         }
     }
     
-//    //MARK: UICollectionViewDataSource
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return dataSource.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellType.reuseId(), for: indexPath)
-//
-//        if let photoCell = cell as? CellType {
-//            photoCell.setup(with: dataSource[indexPath.row])
-//        }
-//        return cell
-//    }
-//
-//    //Mark: UICollectionViewDelegate
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        didSelectHandler?(indexPath, dataSource)
-//    }
-//
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        // For purpose to override in inherited classes.
-//    }
-    
-    //MARK: PhotosCollectionViewUpdater
-//    func append(_ newElements: [PhotoItemModel]) {
-//        let newViewModels = newElements.compactMap({ PhotoItemViewModel(from: $0) })
-//        let oldCount = dataSource.count
-//        dataSource.append(contentsOf: newViewModels)
-//        self.collectionView?.collectionViewLayout.prepare()
-//        let indexPath : [IndexPath] = (oldCount..<dataSource.count).map({IndexPath(row: $0, section: 0)})
-//        self.collectionView?.insertItems(at: indexPath)
-//    }
-    
-//    func allItems() -> [PhotoItemViewModel] {
-//        return dataSource
-//    }
-    
-//    func setNewDataSource(_ newDataSource: [PhotoItemViewModel]) {
-//        dataSource = newDataSource
-//        collectionView?.reloadData()
-//    }
-    
-//    func registerCells() {
-//        collectionView?.register(CellType.self, forCellWithReuseIdentifier: CellType.reuseId())
-//    }
+    func didSelect(at index: Int) {
+        input?.doSelect(with: items[index])
+    }
 
 }

@@ -10,7 +10,7 @@ import Foundation
 
 protocol EventsHandling where View == ViewLoading & ViewDataReloading {
     associatedtype View
-    func loadData(in view: View)
+    func loadDataIfNeeded(in view: View)
 }
 
 protocol ListDataProvider {
